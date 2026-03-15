@@ -32,6 +32,7 @@ const els = {
   tastingPctYes: $('#tastingPctYes'),
   qrConfirm:     $('#qrConfirm'),
   // Countdown
+  cdDays:  $('#cdDays'),
   cdHours: $('#cdHours'),
   cdMins:  $('#cdMins'),
   cdSecs:  $('#cdSecs'),
@@ -167,9 +168,11 @@ function updateCountdown() {
   const target = getNextDrawTime();
   const now = new Date();
   let diff = Math.max(0, Math.floor((target - now) / 1000));
+  const days = Math.floor(diff / 86400); diff %= 86400;
   const hours = Math.floor(diff / 3600); diff %= 3600;
   const mins = Math.floor(diff / 60);
   const secs = diff % 60;
+  if (els.cdDays) els.cdDays.textContent = String(days).padStart(2, '0');
   if (els.cdHours) els.cdHours.textContent = String(hours).padStart(2, '0');
   if (els.cdMins) els.cdMins.textContent = String(mins).padStart(2, '0');
   if (els.cdSecs) els.cdSecs.textContent = String(secs).padStart(2, '0');
