@@ -19,24 +19,24 @@ let state = {
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 
-const els = {
-  // Hero
-  totalHero:   $('#totalVotesHero'),
-  refreshNote: $('#refreshNote'),
-  // Tasting results
-  pctTasteYes:   $('#pctTasteYes'),
-  pctTasteNo:    $('#pctTasteNo'),
-  barTasteYes:   $('#barTasteYes'),
-  barTasteNo:    $('#barTasteNo'),
-  totalTasting:  $('#totalTasting'),
-  tastingPctYes: $('#tastingPctYes'),
-  qrConfirm:     $('#qrConfirm'),
-  // Countdown
-  cdDays:  $('#cdDays'),
-  cdHours: $('#cdHours'),
-  cdMins:  $('#cdMins'),
-  cdSecs:  $('#cdSecs'),
-};
+let els = {};
+function initEls() {
+  els = {
+    totalHero:   $('#totalVotesHero'),
+    refreshNote: $('#refreshNote'),
+    pctTasteYes:   $('#pctTasteYes'),
+    pctTasteNo:    $('#pctTasteNo'),
+    barTasteYes:   $('#barTasteYes'),
+    barTasteNo:    $('#barTasteNo'),
+    totalTasting:  $('#totalTasting'),
+    tastingPctYes: $('#tastingPctYes'),
+    qrConfirm:     $('#qrConfirm'),
+    cdDays:  $('#cdDays'),
+    cdHours: $('#cdHours'),
+    cdMins:  $('#cdMins'),
+    cdSecs:  $('#cdSecs'),
+  };
+}
 
 // ---------- COUNTER ANIMATION ----------
 function animateCounter(el, target, duration = 1200) {
@@ -255,6 +255,7 @@ function initScrollFade() {
 
 // ---------- INIT ----------
 document.addEventListener('DOMContentLoaded', () => {
+  initEls();
   fetchData();
   handleQRVote();
   initModal();
