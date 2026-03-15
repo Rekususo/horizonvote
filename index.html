@@ -16,7 +16,7 @@
 </head>
 <body>
 
-  <!-- ===== HERO ===== -->
+  <!-- ===== HERO + RESULTS (inside the black hole) ===== -->
   <section id="hero" class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -25,52 +25,52 @@
       <p class="hero-subtitle">
         <span id="totalVotesHero" class="counter">0</span> votes and counting...
       </p>
+      <p class="refresh-note" id="refreshNote">Refreshes every 15 seconds</p>
+
+      <!-- QR auto-vote confirmation -->
+      <div class="qr-confirm" id="qrConfirm" hidden>
+        <div class="qr-confirm-icon">&#10003;</div>
+        <p class="qr-confirm-text">Your vote has been recorded!</p>
+      </div>
+
+      <div class="hero-results">
+        <div class="pool-badge">In-Person Tasting Results</div>
+        <p class="pool-desc-italic">Real votes from event attendees who tasted Horizon</p>
+
+        <div class="result-bars">
+          <div class="bar-group">
+            <div class="bar-label">
+              <span class="bar-name">Better with Horizon</span>
+              <span class="bar-pct" id="pctTasteYes">0%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill bar-fill-yes" id="barTasteYes" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="bar-group">
+            <div class="bar-label">
+              <span class="bar-name">Can't tell the difference</span>
+              <span class="bar-pct" id="pctTasteNo">0%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill bar-fill-no" id="barTasteNo" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mini-stats mini-stats-2">
+          <div class="stat-card">
+            <span class="stat-number" id="totalTasting">0</span>
+            <span class="stat-desc">Votes</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="tastingPctYes">0%</span>
+            <span class="stat-desc">Approval</span>
+          </div>
+        </div>
+      </div>
+
       <p class="hero-brand-line">Horizon &mdash; Beyond Every Sip.</p>
-    </div>
-  </section>
-
-  <!-- ===== LIVE RESULTS ===== -->
-  <section id="results" class="section results-section">
-    <div class="pool-badge">In-Person Tasting Results</div>
-    <p class="pool-desc-italic">Real votes from event attendees who tasted Horizon</p>
-    <h2 class="section-title">Better with Horizon?</h2>
-
-    <!-- QR auto-vote confirmation -->
-    <div class="qr-confirm" id="qrConfirm" hidden>
-      <div class="qr-confirm-icon">&#10003;</div>
-      <p class="qr-confirm-text">Your vote has been recorded!</p>
-    </div>
-
-    <div class="result-bars">
-      <div class="bar-group">
-        <div class="bar-label">
-          <span class="bar-name">Better with Horizon</span>
-          <span class="bar-pct" id="pctTasteYes">0%</span>
-        </div>
-        <div class="bar-track">
-          <div class="bar-fill bar-fill-yes" id="barTasteYes" style="width:0%"></div>
-        </div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-label">
-          <span class="bar-name">Can't tell the difference</span>
-          <span class="bar-pct" id="pctTasteNo">0%</span>
-        </div>
-        <div class="bar-track">
-          <div class="bar-fill bar-fill-no" id="barTasteNo" style="width:0%"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="mini-stats mini-stats-2">
-      <div class="stat-card">
-        <span class="stat-number" id="totalTasting">0</span>
-        <span class="stat-desc">Votes</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number" id="tastingPctYes">0%</span>
-        <span class="stat-desc">Approval</span>
-      </div>
     </div>
   </section>
 
