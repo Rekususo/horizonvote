@@ -31,7 +31,7 @@ body {
   font-family: var(--font-body);
   color: var(--text);
   background: var(--void);
-  background-image: url('assets/blackhole.png');
+  background-image: url('assets/blackhole2.png');
   background-position: center top;
   background-size: 200vw auto;
   background-repeat: no-repeat;
@@ -131,7 +131,7 @@ img { max-width: 100%; display: block; }
   content: '';
   position: absolute;
   inset: -20%;
-  background: url('assets/blackhole.png') center center / cover no-repeat;
+  background: url('assets/blackhole2.png') center center / cover no-repeat;
   transform: scale(1.4);
   animation: pulse-horizon 10s ease-in-out infinite alternate;
 }
