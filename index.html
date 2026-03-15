@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Horizon Vote</title>
-  <meta name="description" content="Live voting results from Horizon tasting events. Share and win free Horizon coffee!">
-  <meta property="og:title" content="Horizon Vote – Live Results">
-  <meta property="og:description" content="Would Horizon make it better? See what everyone thinks!">
+  <meta name="description" content="Live tasting results from Event Horizon. Share and win free Horizon coffee!">
+  <meta property="og:title" content="Event Horizon – Live Results">
+  <meta property="og:description" content="Would Horizon make it better? See what tasters think!">
   <meta name="theme-color" content="#000000">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,34 +30,14 @@
     </div>
   </section>
 
-  <!-- ===== TASTING VOTE (QR ONLY) ===== -->
-  <section id="pool-tasting" class="section pool pool-tasting">
-    <div class="pool-badge">In-Person Tasting Vote</div>
-    <p class="pool-desc-italic">Only for people who tasted Horizon at the event</p>
+  <!-- ===== LIVE RESULTS ===== -->
+  <section id="results" class="section results-section">
     <h2 class="section-title">Better with Horizon?</h2>
 
     <!-- QR auto-vote confirmation -->
     <div class="qr-confirm" id="qrConfirm" hidden>
       <div class="qr-confirm-icon">&#10003;</div>
-      <p class="qr-confirm-text">Your vote for <strong>"Better with Horizon"</strong> has been recorded!</p>
-      <div class="share-prompt">
-        <p class="share-prompt-title">Share for bonus raffle entries!</p>
-        <div class="share-prompt-tiers">
-          <div class="share-tier">
-            <span class="share-tier-badge">+2 entries</span>
-            <p>Repost to your <strong>IG Feed</strong></p>
-          </div>
-          <div class="share-tier share-tier-highlight">
-            <span class="share-tier-badge share-tier-badge-glow">+5 entries</span>
-            <p>Share to your <strong>IG Story</strong></p>
-          </div>
-        </div>
-        <p class="share-prompt-instructions">Tag a friend + <strong>@acaiacoffee</strong> + <strong>#BetterWithHorizon #AcaiaHorizon</strong></p>
-        <div class="share-prompt-actions">
-          <button class="btn btn-accent btn-sm" id="btnScreenshotQR">Screenshot This</button>
-          <button class="btn btn-accent btn-sm" id="btnCopyLinkQR">Copy Link</button>
-        </div>
-      </div>
+      <p class="qr-confirm-text">Your vote has been recorded!</p>
     </div>
 
     <div class="result-bars">
@@ -84,7 +64,7 @@
     <div class="mini-stats mini-stats-2">
       <div class="stat-card">
         <span class="stat-number" id="totalTasting">0</span>
-        <span class="stat-desc">Votes</span>
+        <span class="stat-desc">Total Votes</span>
       </div>
       <div class="stat-card">
         <span class="stat-number" id="tastingPctYes">0%</span>
@@ -93,93 +73,23 @@
     </div>
   </section>
 
-  <!-- ===== HOW IT WORKS ===== -->
-  <section id="how-it-works" class="section how-it-works">
-    <h2 class="section-title">How It Works</h2>
-
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <div class="step-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-        </div>
-        <h3 class="step-title">Taste &amp; Vote</h3>
-        <p class="step-desc">At the event? Scan the QR code after tasting to cast your vote.</p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <div class="step-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        </div>
-        <h3 class="step-title">Share &amp; Enter</h3>
-        <p class="step-desc">Repost this page to your IG Feed or Story, tag a friend + <strong>@acaiacoffee</strong> + <strong>#BetterWithHorizon</strong></p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <div class="step-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <h3 class="step-title">Win Big</h3>
-        <p class="step-desc">Every share is a raffle entry. Feed repost = <strong>+2</strong>. Story share = <strong>+5</strong>. Tag a friend = <strong>+1 each</strong>!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== LUCKY DRAW – SHARE TO ENTER ===== -->
+  <!-- ===== SHARE TO WIN ===== -->
   <section id="giveaway" class="section giveaway">
     <h2 class="section-title">Share &amp; Win Free Horizon!</h2>
-    <p class="giveaway-subtitle">You don't need to be at the event &mdash; anyone can enter the lucky draw by sharing!</p>
+    <p class="giveaway-subtitle">Repost these results and tag a friend for a chance to win.</p>
 
-    <div class="prize-grid">
-      <div class="prize-card">
-        <div class="prize-img-placeholder" aria-label="Horizon Coffee Starter Set">Prize 1</div>
-        <p>Horizon Coffee Starter Set</p>
+    <div class="share-steps">
+      <div class="share-step">
+        <span class="share-step-num">1</span>
+        <p>Screenshot or repost this page to your <strong>IG Feed</strong> or <strong>Story</strong></p>
       </div>
-      <div class="prize-card">
-        <div class="prize-img-placeholder" aria-label="Exclusive Event Merch Bundle">Prize 2</div>
-        <p>Exclusive Event Merch Bundle</p>
+      <div class="share-step">
+        <span class="share-step-num">2</span>
+        <p>Tag a friend + <strong>@acaiacoffee</strong> + <strong>#BetterWithHorizon</strong></p>
       </div>
-      <div class="prize-card">
-        <div class="prize-img-placeholder" aria-label="Digital Gift Card">Prize 3</div>
-        <p>Digital Gift Card</p>
-      </div>
-    </div>
-
-    <div class="bonus-entries-card">
-      <p class="bonus-entries-title">How to Enter</p>
-      <table class="bonus-table">
-        <tr>
-          <td class="bonus-action">Repost this page or screenshot to your <strong>IG Feed</strong><br><span class="bonus-detail">+ tag a friend + @acaiacoffee + #BetterWithHorizon</span></td>
-          <td class="bonus-value bonus-value-accent">+2 entries</td>
-        </tr>
-        <tr>
-          <td class="bonus-action">Share to your <strong>IG Story</strong><br><span class="bonus-detail">+ tag a friend + @acaiacoffee + #BetterWithHorizon</span></td>
-          <td class="bonus-value bonus-value-glow">+5 entries</td>
-        </tr>
-        <tr>
-          <td class="bonus-action">Tag additional friends<br><span class="bonus-detail">Each friend tagged = extra entry</span></td>
-          <td class="bonus-value">+1 each</td>
-        </tr>
-      </table>
-      <p class="bonus-stack-note">Bonuses stack! Feed + Story + 3 friends = <strong>10 entries</strong></p>
-    </div>
-
-    <div class="rules-title-inline">3 Steps to Enter</div>
-    <ol class="entry-rules">
-      <li>Follow <a href="https://www.instagram.com/coffeelex/?utm_source=results_page&utm_medium=giveaway" target="_blank" rel="noopener">@coffeelex</a> on Instagram</li>
-      <li>Repost this page or screenshot to your Feed or Story</li>
-      <li>Tag a friend + <strong>@acaiacoffee</strong> + <strong>#BetterWithHorizon #AcaiaHorizon</strong></li>
-    </ol>
-
-    <!-- Countdown -->
-    <div class="countdown-block">
-      <p class="countdown-label">Next draw in:</p>
-      <div class="countdown" id="countdown">
-        <div class="cd-unit"><span id="cdHours">00</span><small>hrs</small></div>
-        <div class="cd-unit"><span id="cdMins">00</span><small>min</small></div>
-        <div class="cd-unit"><span id="cdSecs">00</span><small>sec</small></div>
+      <div class="share-step">
+        <span class="share-step-num">3</span>
+        <p>Follow <a href="https://www.instagram.com/coffeelex/?utm_source=results_page&utm_medium=giveaway" target="_blank" rel="noopener">@coffeelex</a> on Instagram</p>
       </div>
     </div>
 
@@ -202,27 +112,12 @@
       <ul>
         <li>No purchase necessary.</li>
         <li>Must follow @coffeelex to qualify.</li>
-        <li>Entries verified via tags, mentions, and #BetterWithHorizon #AcaiaHorizon.</li>
-        <li>Tag a friend in your repost or story for bonus entries (+1 per friend tagged).</li>
+        <li>Repost this page to your IG Feed or Story.</li>
+        <li>Tag a friend + @acaiacoffee + #BetterWithHorizon.</li>
         <li>Winners chosen randomly and announced on @coffeelex Stories within 48 hours.</li>
-        <li>Full terms apply.</li>
       </ul>
     </div>
   </div>
-
-  <!-- ===== EVENT HIGHLIGHTS ===== -->
-  <section id="highlights" class="section highlights">
-    <h2 class="section-title">Event Highlights</h2>
-    <div class="photo-scroll">
-      <div class="photo-placeholder" aria-label="Event photo 1">Photo 1</div>
-      <div class="photo-placeholder" aria-label="Event photo 2">Photo 2</div>
-      <div class="photo-placeholder" aria-label="Event photo 3">Photo 3</div>
-      <div class="photo-placeholder" aria-label="Event photo 4">Photo 4</div>
-      <div class="photo-placeholder" aria-label="Event photo 5">Photo 5</div>
-      <div class="photo-placeholder" aria-label="Event photo 6">Photo 6</div>
-    </div>
-    <p class="brand-blurb"><strong>Horizon &mdash; Beyond Every Sip.</strong><br>Discover the extraordinary in every cup.</p>
-  </section>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
@@ -232,7 +127,7 @@
       </a>
     </div>
     <p class="footer-legal">
-      <a href="#" id="footerRules">Full Rules</a> &middot; <a href="#">Privacy</a> &middot; No purchase necessary.
+      <a href="#" id="footerRules">Rules</a> &middot; No purchase necessary.
     </p>
     <p class="footer-brand">Powered by <strong>Acaia</strong></p>
   </footer>

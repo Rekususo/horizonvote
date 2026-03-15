@@ -486,6 +486,16 @@ img { max-width: 100%; display: block; }
   font-size: 0.85rem;
 }
 
+/* ===== RESULTS SECTION ===== */
+.results-section {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.04);
+  margin-top: -1.5rem;
+  position: relative;
+  z-index: 2;
+  box-shadow: var(--shadow);
+}
+
 /* ===== GIVEAWAY ===== */
 .giveaway {
   background: var(--void-mid);
@@ -503,6 +513,46 @@ img { max-width: 100%; display: block; }
   margin-top: -0.75rem;
   margin-bottom: 1.75rem;
   line-height: 1.5;
+}
+
+/* Share steps */
+.share-steps {
+  margin-bottom: 2rem;
+}
+.share-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.share-step:last-child {
+  border-bottom: none;
+}
+.share-step-num {
+  flex-shrink: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: var(--teal);
+  color: var(--void);
+  border-radius: 50%;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.1rem;
+}
+.share-step p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+.share-step a {
+  color: var(--teal-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .prize-grid {
