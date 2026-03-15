@@ -127,7 +127,7 @@ img { max-width: 100%; display: block; }
   content: '';
   position: absolute;
   inset: -30%;
-  background: url('assets/blackhole2.png') center 38% / cover no-repeat;
+  background: url('assets/blackhole.png') center 38% / cover no-repeat;
   transform: scale(1.6);
 }
 
