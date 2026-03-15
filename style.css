@@ -31,10 +31,6 @@ body {
   font-family: var(--font-body);
   color: var(--text);
   background: var(--void);
-  background-image: url('assets/blackhole2.png');
-  background-position: center top;
-  background-size: 200vw auto;
-  background-repeat: no-repeat;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -126,29 +122,23 @@ img { max-width: 100%; display: block; }
   padding: 3rem 0;
 }
 
-/* Black hole background — enlarged so the void encapsulates content */
+/* Black hole background — positioned so the void encapsulates voting results */
 .hero::before {
   content: '';
   position: absolute;
-  inset: -20%;
-  background: url('assets/blackhole2.png') center center / cover no-repeat;
-  transform: scale(1.4);
-  animation: pulse-horizon 10s ease-in-out infinite alternate;
-}
-
-@keyframes pulse-horizon {
-  0%   { opacity: 0.85; transform: scale(1.4); }
-  100% { opacity: 1;    transform: scale(1.45); }
+  inset: -30%;
+  background: url('assets/blackhole2.png') center 38% / cover no-repeat;
+  transform: scale(1.6);
 }
 
 /* Dark overlay to ensure text readability inside the black hole center */
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 40% 35% at 50% 50%,
-    rgba(0,0,0,0.7) 0%,
-    rgba(0,0,0,0.3) 50%,
-    transparent 75%);
+  background: radial-gradient(ellipse 35% 25% at 50% 55%,
+    rgba(0,0,0,0.6) 0%,
+    rgba(0,0,0,0.2) 60%,
+    transparent 80%);
   pointer-events: none;
 }
 
