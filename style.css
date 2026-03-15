@@ -31,6 +31,10 @@ body {
   font-family: var(--font-body);
   color: var(--text);
   background: var(--void);
+  background-image: url('assets/blackhole.png');
+  background-position: center top;
+  background-size: 200vw auto;
+  background-repeat: no-repeat;
   line-height: 1.6;
   overflow-x: hidden;
 }
