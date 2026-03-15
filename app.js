@@ -1,12 +1,9 @@
-/* ===== Event Horizon – Live Results (Two Pools) ===== */
+/* ===== Event Horizon – Live Results (QR Tasting Only) ===== */
 
 // ---------- CONFIG ----------
 const CONFIG = {
   pollInterval: 15000,
-
-  // Google Apps Script web app URL (reads & writes votes)
   sheetUrl: 'https://script.google.com/macros/s/AKfycbxbjw54Gbz3d1SHnZRj6K_2zz6tnctVmaZS23uue4QHoNGZUKTjTchlt7LULTDSC31gHQ/exec',
-
   countdownTarget: null,
 };
 
@@ -14,8 +11,6 @@ const CONFIG = {
 let state = {
   taste_yes: 0,
   taste_no: 0,
-  cross: 0,
-  doubt: 0,
   fun_fact: '--',
   lastFetchTime: null,
 };
@@ -28,7 +23,7 @@ const els = {
   // Hero
   totalHero:   $('#totalVotesHero'),
   refreshNote: $('#refreshNote'),
-  // Pool 1 - Tasting
+  // Tasting results
   pctTasteYes:   $('#pctTasteYes'),
   pctTasteNo:    $('#pctTasteNo'),
   barTasteYes:   $('#barTasteYes'),
@@ -36,30 +31,6 @@ const els = {
   totalTasting:  $('#totalTasting'),
   tastingPctYes: $('#tastingPctYes'),
   qrConfirm:     $('#qrConfirm'),
-  // Pool 2 - Online
-  pctCross:      $('#pctCross'),
-  pctDoubt:      $('#pctDoubt'),
-  barCross:      $('#barCross'),
-  barDoubt:      $('#barDoubt'),
-  totalOnline:   $('#totalOnline'),
-  onlinePctCross:$('#onlinePctCross'),
-  voteButtons:   $('#voteButtons'),
-  voteDone:      $('#voteDone'),
-  btnCross:      $('#btnCross'),
-  btnDoubt:      $('#btnDoubt'),
-  // Dashboard
-  chartTasteYes:    $('#chartTasteYes'),
-  chartTasteNo:     $('#chartTasteNo'),
-  chartCross:       $('#chartCross'),
-  chartDoubt:       $('#chartDoubt'),
-  chartPctTasteYes: $('#chartPctTasteYes'),
-  chartPctTasteNo:  $('#chartPctTasteNo'),
-  chartPctCross:    $('#chartPctCross'),
-  chartPctDoubt:    $('#chartPctDoubt'),
-  totalAll:    $('#totalAll'),
-  lastVote:    $('#lastVoteTime'),
-  funStat:     $('#funStat'),
-  funStatDesc: $('#funStatDesc'),
   // Countdown
   cdHours: $('#cdHours'),
   cdMins:  $('#cdMins'),
@@ -89,8 +60,6 @@ function animateCounter(el, target, duration = 1200) {
 function applyData(data) {
   if (data.taste_yes !== undefined) state.taste_yes = parseInt(data.taste_yes, 10) || 0;
   if (data.taste_no !== undefined)  state.taste_no = parseInt(data.taste_no, 10) || 0;
-  if (data.cross !== undefined)     state.cross = parseInt(data.cross, 10) || 0;
-  if (data.doubt !== undefined)     state.doubt = parseInt(data.doubt, 10) || 0;
   if (data.fun_fact)                state.fun_fact = data.fun_fact;
   state.lastFetchTime = new Date();
 }
@@ -101,68 +70,29 @@ function pct(a, total) {
 }
 
 // ---------- UPDATE UI ----------
-function formatTimeAgo(date) {
-  if (!date) return '--';
-  const secs = Math.floor((Date.now() - date.getTime()) / 1000);
-  if (secs < 5) return 'just now';
-  if (secs < 60) return secs + 's ago';
-  return Math.floor(secs / 60) + 'm ago';
-}
-
 function updateUI() {
   const tasteTotal = state.taste_yes + state.taste_no;
-  const onlineTotal = state.cross + state.doubt;
-  const grandTotal = tasteTotal + onlineTotal;
 
   const pTasteYes = pct(state.taste_yes, tasteTotal);
   const pTasteNo = tasteTotal > 0 ? 100 - pTasteYes : 0;
-  const pCross = pct(state.cross, onlineTotal);
-  const pDoubt = onlineTotal > 0 ? 100 - pCross : 0;
 
   // Hero
-  animateCounter(els.totalHero, grandTotal);
+  animateCounter(els.totalHero, tasteTotal);
 
-  // Pool 1 bars
+  // Tasting bars
   if (els.pctTasteYes) els.pctTasteYes.textContent = pTasteYes + '%';
   if (els.pctTasteNo) els.pctTasteNo.textContent = pTasteNo + '%';
   if (els.barTasteYes) els.barTasteYes.style.width = pTasteYes + '%';
   if (els.barTasteNo) els.barTasteNo.style.width = pTasteNo + '%';
   animateCounter(els.totalTasting, tasteTotal);
   if (els.tastingPctYes) els.tastingPctYes.textContent = pTasteYes + '%';
-
-  // Pool 2 bars
-  if (els.pctCross) els.pctCross.textContent = pCross + '%';
-  if (els.pctDoubt) els.pctDoubt.textContent = pDoubt + '%';
-  if (els.barCross) els.barCross.style.width = pCross + '%';
-  if (els.barDoubt) els.barDoubt.style.width = pDoubt + '%';
-  animateCounter(els.totalOnline, onlineTotal);
-  if (els.onlinePctCross) els.onlinePctCross.textContent = pCross + '%';
-
-  // Dashboard chart - heights relative to max across all 4 values
-  const maxVal = Math.max(state.taste_yes, state.taste_no, state.cross, state.doubt, 1);
-  if (els.chartTasteYes) els.chartTasteYes.style.height = Math.round((state.taste_yes / maxVal) * 100) + '%';
-  if (els.chartTasteNo) els.chartTasteNo.style.height = Math.round((state.taste_no / maxVal) * 100) + '%';
-  if (els.chartCross) els.chartCross.style.height = Math.round((state.cross / maxVal) * 100) + '%';
-  if (els.chartDoubt) els.chartDoubt.style.height = Math.round((state.doubt / maxVal) * 100) + '%';
-  if (els.chartPctTasteYes) els.chartPctTasteYes.textContent = state.taste_yes.toLocaleString();
-  if (els.chartPctTasteNo) els.chartPctTasteNo.textContent = state.taste_no.toLocaleString();
-  if (els.chartPctCross) els.chartPctCross.textContent = state.cross.toLocaleString();
-  if (els.chartPctDoubt) els.chartPctDoubt.textContent = state.doubt.toLocaleString();
-
-  // Dashboard stats
-  animateCounter(els.totalAll, grandTotal);
-  if (els.lastVote) els.lastVote.textContent = formatTimeAgo(state.lastFetchTime);
-  if (els.funStat) els.funStat.textContent = state.fun_fact;
 }
 
 // ---------- DATA FETCHING ----------
 async function fetchData() {
   if (!CONFIG.sheetUrl) {
-    // Mock data for demo
     state.taste_yes += Math.floor(Math.random() * 5);
     state.taste_no += Math.floor(Math.random() * 2);
-    state.cross += Math.floor(Math.random() * 4);
-    state.doubt += Math.floor(Math.random() * 2);
     state.fun_fact = 'Horizon works with tea too!';
     state.lastFetchTime = new Date();
     updateUI();
@@ -187,11 +117,8 @@ async function fetchData() {
 // ---------- VOTE SUBMISSION ----------
 async function submitVote(type) {
   if (!CONFIG.sheetUrl) {
-    // No script URL — increment locally as demo
     if (type === 'taste_yes') state.taste_yes++;
     if (type === 'taste_no') state.taste_no++;
-    if (type === 'cross') state.cross++;
-    if (type === 'doubt') state.doubt++;
     state.lastFetchTime = new Date();
     updateUI();
     return true;
@@ -200,7 +127,6 @@ async function submitVote(type) {
   try {
     const url = CONFIG.sheetUrl + '?action=vote&type=' + encodeURIComponent(type);
     await fetch(url, { mode: 'no-cors' });
-    // Refetch to get updated counts
     setTimeout(fetchData, 1000);
     return true;
   } catch (err) {
@@ -224,36 +150,6 @@ function handleQRVote() {
       }
     });
     window.history.replaceState({}, '', window.location.pathname);
-  }
-}
-
-// ---------- ONLINE VOTE BUTTONS ----------
-function initOnlineVote() {
-  if (!els.btnCross || !els.btnDoubt) return;
-
-  const hasVoted = localStorage.getItem('horizon_online_voted');
-  if (hasVoted) {
-    if (els.voteButtons) els.voteButtons.hidden = true;
-    if (els.voteDone) els.voteDone.hidden = false;
-    return;
-  }
-
-  els.btnCross.addEventListener('click', () => castOnlineVote('cross'));
-  els.btnDoubt.addEventListener('click', () => castOnlineVote('doubt'));
-}
-
-async function castOnlineVote(type) {
-  els.btnCross.disabled = true;
-  els.btnDoubt.disabled = true;
-
-  const ok = await submitVote(type);
-  if (ok) {
-    if (els.voteButtons) els.voteButtons.hidden = true;
-    if (els.voteDone) els.voteDone.hidden = false;
-    localStorage.setItem('horizon_online_voted', type);
-  } else {
-    els.btnCross.disabled = false;
-    els.btnDoubt.disabled = false;
   }
 }
 
@@ -323,7 +219,7 @@ function flashButton(btn, msg) {
 }
 
 function initCopyLink() {
-  ['#btnCopyLink', '#btnCopyLinkQR', '#btnCopyLinkVote'].forEach(sel => {
+  ['#btnCopyLink', '#btnCopyLinkQR'].forEach(sel => {
     const btn = $(sel);
     if (!btn) return;
     btn.addEventListener('click', async () => {
@@ -332,7 +228,7 @@ function initCopyLink() {
     });
   });
 
-  ['#btnScreenshotQR', '#btnScreenshot'].forEach(sel => {
+  ['#btnScreenshotQR'].forEach(sel => {
     const btn = $(sel);
     if (!btn) return;
     btn.addEventListener('click', () => {
@@ -358,17 +254,11 @@ function initScrollFade() {
 document.addEventListener('DOMContentLoaded', () => {
   fetchData();
   handleQRVote();
-  initOnlineVote();
   initModal();
   initCopyLink();
   initScrollFade();
 
   setInterval(fetchData, CONFIG.pollInterval);
-  setInterval(() => {
-    if (state.lastFetchTime && els.lastVote) {
-      els.lastVote.textContent = formatTimeAgo(state.lastFetchTime);
-    }
-  }, 1000);
   updateCountdown();
   setInterval(updateCountdown, 1000);
 });
