@@ -13,8 +13,8 @@
   --void-card: #0C0C10;
   --surface: #111114;
   --surface-light: #1A1A1F;
-  --text: #E0DDD5;
-  --text-dim: #807D74;
+  --text: #F0EDE5;
+  --text-dim: #B0AAA0;
   --white: #FFFFFF;
   --radius: 12px;
   --radius-sm: 8px;
@@ -70,6 +70,7 @@ img { max-width: 100%; display: block; }
   margin-bottom: 1.5rem;
   color: var(--white);
   letter-spacing: 0.06em;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
 }
 
 /* ===== BUTTONS ===== */
@@ -176,15 +177,17 @@ img { max-width: 100%; display: block; }
   margin-bottom: 0.4rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.8), 0 0 30px rgba(0,0,0,0.5);
 }
 .hero-tagline {
   font-family: var(--font-body);
   font-size: clamp(0.7rem, 2.5vw, 1rem);
   font-weight: 400;
-  color: var(--text-dim);
+  color: var(--gold-light);
   margin-bottom: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.7);
 }
 .hero-subtitle {
   font-size: 1.1rem;
@@ -202,10 +205,11 @@ img { max-width: 100%; display: block; }
 .hero-brand-line {
   font-size: 0.8rem;
   font-weight: 400;
-  color: rgba(224,221,213,0.3);
+  color: rgba(240,237,229,0.5);
   margin-top: 1rem;
   letter-spacing: 0.08em;
   font-style: italic;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
 }
 
 /* ===== RESULT BARS ===== */
@@ -223,15 +227,17 @@ img { max-width: 100%; display: block; }
 }
 .bar-name {
   font-size: 0.85rem;
-  font-weight: 500;
-  color: rgba(224,221,213,0.7);
+  font-weight: 600;
+  color: rgba(240,237,229,0.85);
   letter-spacing: 0.02em;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
 }
 .bar-pct {
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 1.2rem;
   color: var(--white);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.7);
 }
 .bar-track {
   height: 12px;
