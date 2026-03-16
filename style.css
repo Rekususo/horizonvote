@@ -35,11 +35,23 @@ body {
   overflow-x: hidden;
 }
 
+/* Fixed full-viewport blackhole background — everything scrolls over it */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('assets/blackhole2.png') 54% 30% / cover no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 
 /* ===== UTILITIES ===== */
 .section {
+  position: relative;
+  z-index: 1;
   padding: 3rem 1.5rem;
   max-width: 600px;
   margin: 0 auto;
@@ -112,72 +124,59 @@ img { max-width: 100%; display: block; }
 /* ===== HERO ===== */
 .hero {
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
+  z-index: 1;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--void);
-  overflow: hidden;
+  background: none;
 }
 
-/* Black hole background — sized to image's 2:3 ratio, void centre (~43% from top) aligned with hero centre */
-.hero::before {
-  content: '';
-  position: absolute;
-  width: 280vw;
-  height: 420vw;               /* 2:3 ratio matches blackhole.png */
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -43%);  /* -43% shifts void centre to hero centre */
-  background: url('assets/blackhole.png') center / contain no-repeat;
-}
-
-/* Subtle overlay for extra readability */
 .hero-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+  display: none;
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 2rem 1.5rem;
-  max-width: 400px;
-  width: 100%;
+  max-width: 320px;
+  width: 85%;
+  /* Nudge up slightly to match void centre (void sits ~33% from top, not 50%) */
+  margin-top: -12vh;
 }
 
 /* Results embedded in hero — inside the black hole void */
 .hero-results {
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
   text-align: left;
   width: 100%;
 }
 .hero-results .stat-card {
-  background: rgba(12,12,16,0.4);
+  background: rgba(12,12,16,0.5);
   backdrop-filter: blur(6px);
-  border-color: rgba(232,213,168,0.08);
+  -webkit-backdrop-filter: blur(6px);
+  border-color: rgba(232,213,168,0.1);
 }
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.2rem, 8vw, 3.5rem);
+  font-size: clamp(1.4rem, 6vw, 2.5rem);
   font-weight: 800;
   color: var(--white);
   line-height: 1.15;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.4rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
 .hero-tagline {
   font-family: var(--font-body);
-  font-size: 1.1rem;
+  font-size: clamp(0.7rem, 2.5vw, 1rem);
   font-weight: 400;
   color: var(--text-dim);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -195,10 +194,10 @@ img { max-width: 100%; display: block; }
   text-shadow: 0 0 20px rgba(232,213,168,0.4);
 }
 .hero-brand-line {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: rgba(224,221,213,0.3);
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   letter-spacing: 0.08em;
   font-style: italic;
 }
@@ -208,7 +207,7 @@ img { max-width: 100%; display: block; }
   margin-bottom: 0.75rem;
 }
 .bar-group {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 .bar-label {
   display: flex;
@@ -217,7 +216,7 @@ img { max-width: 100%; display: block; }
   margin-bottom: 0.3rem;
 }
 .bar-name {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: rgba(224,221,213,0.7);
   letter-spacing: 0.02em;
@@ -225,11 +224,11 @@ img { max-width: 100%; display: block; }
 .bar-pct {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: var(--white);
 }
 .bar-track {
-  height: 14px;
+  height: 12px;
   background: rgba(232,213,168,0.05);
   border-radius: 7px;
   overflow: hidden;
@@ -378,7 +377,7 @@ img { max-width: 100%; display: block; }
 .mini-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 .mini-stats-2 {
   grid-template-columns: repeat(2, 1fr);
@@ -386,7 +385,7 @@ img { max-width: 100%; display: block; }
 .stat-card {
   background: var(--void-card);
   border-radius: var(--radius-sm);
-  padding: 1rem 0.5rem;
+  padding: 0.75rem 0.5rem;
   text-align: center;
   border: 1px solid rgba(255,255,255,0.04);
 }
@@ -394,12 +393,12 @@ img { max-width: 100%; display: block; }
   display: block;
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: var(--gold);
   text-shadow: 0 0 8px rgba(232,213,168,0.2);
 }
 .stat-desc {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--text-dim);
   font-weight: 500;
   text-transform: uppercase;
@@ -472,10 +471,12 @@ img { max-width: 100%; display: block; }
 
 /* ===== GIVEAWAY ===== */
 .giveaway {
-  background: var(--void-mid);
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: var(--text);
   text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.04);
+  border-top: none;
 }
 .giveaway .section-title {
   color: var(--gold-light);
@@ -786,7 +787,9 @@ img { max-width: 100%; display: block; }
 /* ===== HIGHLIGHTS ===== */
 .highlights {
   text-align: center;
-  background: var(--void);
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .photo-scroll {
   display: flex;
@@ -819,11 +822,15 @@ img { max-width: 100%; display: block; }
 
 /* ===== FOOTER ===== */
 .footer {
-  background: var(--void);
+  position: relative;
+  z-index: 1;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--text-dim);
   text-align: center;
   padding: 2rem 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.04);
+  border-top: none;
 }
 .footer-social {
   margin-bottom: 1rem;
@@ -862,6 +869,6 @@ img { max-width: 100%; display: block; }
 /* ===== RESPONSIVE ===== */
 @media (min-width: 768px) {
   .section { max-width: 680px; padding: 4rem 2rem; }
-  .hero-title { font-size: 3.5rem; }
+  .hero-content { max-width: 380px; }
   .share-tools { flex-direction: row; justify-content: center; }
 }
