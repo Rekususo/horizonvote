@@ -38,17 +38,13 @@ body {
 /* Fixed full-viewport blackhole background — real DOM element for iOS compat */
 .bg-blackhole {
   position: fixed;
-  top: -20%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
-  background: url('assets/blackhole.png?v=9') 50% 40% / cover no-repeat;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('assets/blackhole.png?v=9') center top / cover no-repeat;
   z-index: 0;
   pointer-events: none;
-}
-
-@media (min-width: 768px) {
-  .bg-blackhole { top: 0; left: 0; width: 100%; height: 100%; }
 }
 
 a { color: inherit; text-decoration: none; }
@@ -132,12 +128,13 @@ img { max-width: 100%; display: block; }
 .hero {
   position: relative;
   z-index: 1;
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   background: none;
+  padding-bottom: 2rem;
 }
 
 .hero-overlay {
@@ -148,10 +145,8 @@ img { max-width: 100%; display: block; }
   position: relative;
   z-index: 1;
   text-align: center;
-  max-width: 320px;
-  width: 85%;
-  /* Nudge up slightly to match void centre (void sits ~33% from top, not 50%) */
-  margin-top: -12vh;
+  max-width: 380px;
+  width: 90%;
 }
 
 /* Results embedded in hero — inside the black hole void */
