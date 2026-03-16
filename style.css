@@ -42,7 +42,7 @@ body {
   left: -20%;
   width: 140%;
   height: 140%;
-  background: url('assets/blackhole2.jpg') 54% 30% / cover no-repeat;
+  background: url('assets/blackhole2.jpg?v=4') 54% 30% / cover no-repeat;
   z-index: 0;
   pointer-events: none;
 }
