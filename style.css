@@ -643,6 +643,14 @@ img { max-width: 100%; display: block; }
   margin-bottom: 0.75rem;
   letter-spacing: 0.04em;
 }
+.rules-subtitle {
+  display: block;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+  margin-top: 0.2rem;
+}
 
 .entry-rules {
   text-align: left;
