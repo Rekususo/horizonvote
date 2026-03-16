@@ -40,7 +40,7 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: url('assets/blackhole2.png') 54% 30% / cover no-repeat;
+  background: url('assets/blackhole2.jpg') 54% 30% / cover no-repeat;
   z-index: 0;
   pointer-events: none;
 }
