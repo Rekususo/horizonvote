@@ -152,12 +152,6 @@ img { max-width: 100%; display: block; }
   width: 85%;
   /* Nudge up slightly to match void centre (void sits ~33% from top, not 50%) */
   margin-top: -12vh;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: var(--radius);
-  padding: 1.5rem 1.25rem;
-  border: 1px solid rgba(232,213,168,0.08);
 }
 
 /* Results embedded in hero — inside the black hole void */
@@ -166,6 +160,12 @@ img { max-width: 100%; display: block; }
   margin-bottom: 0.25rem;
   text-align: left;
   width: 100%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 1rem;
+  border: 1px solid rgba(232,213,168,0.08);
 }
 .hero-results .stat-card {
   background: rgba(12,12,16,0.5);
