@@ -124,24 +124,23 @@ img { max-width: 100%; display: block; }
   pointer-events: none;
 }
 
-/* ===== HERO ===== */
+/* ===== HERO (spacer for blackhole bg) ===== */
 .hero {
   position: relative;
   z-index: 1;
   min-height: 100vh;
   min-height: 100dvh;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 3rem;
 }
 
-.hero-content {
+/* ===== TITLE BLOCK (below blackhole) ===== */
+.title-block {
   position: relative;
   z-index: 1;
   text-align: center;
   max-width: 500px;
   width: 90%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 1rem;
 }
 
 /* ===== HERO TITLE ===== */
