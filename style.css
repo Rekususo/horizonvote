@@ -112,35 +112,31 @@ img { max-width: 100%; display: block; }
   margin-top: 1rem;
 }
 
-/* ===== HERO: Blackhole Circle ===== */
+/* Fixed full-viewport blackhole background */
+.bg-blackhole {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('assets/blackhole.png?v=14') center top / cover no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== HERO ===== */
 .hero {
   position: relative;
   z-index: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  padding: 4rem 1.5rem 2rem;
-  min-height: 50vh;
-  background: radial-gradient(ellipse at center, rgba(30,15,5,0.3) 0%, transparent 70%);
+  padding-bottom: 2rem;
 }
 
-.blackhole-circle {
-  position: relative;
-  width: clamp(240px, 60vw, 380px);
-  height: clamp(240px, 60vw, 380px);
-  border-radius: 50%;
-  background: radial-gradient(circle, #050505 40%, #0a0808 60%, #111 80%, transparent 100%);
-  box-shadow:
-    0 0 60px 10px rgba(232,160,80,0.15),
-    0 0 120px 30px rgba(200,100,40,0.08),
-    inset 0 0 60px 10px rgba(0,0,0,0.8);
-  border: 2px solid rgba(232,160,80,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.blackhole-votes {
+.hero-votes {
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: clamp(1rem, 3vw, 1.3rem);
@@ -148,6 +144,12 @@ img { max-width: 100%; display: block; }
   text-shadow: 0 0 16px rgba(232,213,168,0.4);
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 0.4rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(232,213,168,0.15);
 }
 
 /* ===== CITIES BAR ===== */
