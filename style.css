@@ -217,19 +217,15 @@ img { max-width: 100%; display: block; }
 }
 
 .vote-box-count {
-  position: absolute;
-  top: -0.7rem;
-  right: 1rem;
-  font-family: var(--font-heading);
-  font-weight: 800;
+  display: block;
+  text-align: right;
+  font-family: var(--font-body);
+  font-weight: 400;
   font-size: 0.7rem;
-  color: var(--void);
-  background: var(--gold);
-  padding: 0.25rem 0.7rem;
-  border-radius: 999px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  box-shadow: 0 2px 10px rgba(232,213,168,0.3);
+  color: var(--text-dim);
+  opacity: 0.45;
+  margin-top: 0.5rem;
+  letter-spacing: 0.02em;
 }
 
 /* ===== RESULT BARS ===== */
