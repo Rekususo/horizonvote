@@ -22,7 +22,6 @@ const $$ = (sel) => document.querySelectorAll(sel);
 let els = {};
 function initEls() {
   els = {
-    totalVotesCircle: $('#totalVotesCircle'),
     pctTasteYes:   $('#pctTasteYes'),
     pctTasteNo:    $('#pctTasteNo'),
     barTasteYes:   $('#barTasteYes'),
@@ -74,9 +73,6 @@ function updateUI() {
 
   const pTasteYes = pct(state.taste_yes, tasteTotal);
   const pTasteNo = tasteTotal > 0 ? 100 - pTasteYes : 0;
-
-  // Blackhole circle vote count
-  if (els.totalVotesCircle) els.totalVotesCircle.textContent = tasteTotal.toLocaleString() + ' votes';
 
   // Tasting bars
   if (els.pctTasteYes) els.pctTasteYes.textContent = pTasteYes + '%';

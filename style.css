@@ -133,54 +133,18 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
 }
 
-.hero-votes {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: clamp(1rem, 3vw, 1.3rem);
-  color: var(--gold);
-  text-shadow: 0 0 16px rgba(232,213,168,0.4);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  padding: 0.4rem 1.2rem;
-  border-radius: 999px;
-  border: 1px solid rgba(232,213,168,0.15);
-}
-
-/* ===== CITIES BAR ===== */
-.cities-bar {
+.hero-content {
+  position: relative;
+  z-index: 1;
   text-align: center;
-  font-family: var(--font-body);
-  font-size: clamp(0.55rem, 1.8vw, 0.75rem);
-  color: var(--text-dim);
-  letter-spacing: 0.04em;
-  padding: 0.75rem 1.5rem;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
-}
-
-/* ===== EVENT DESCRIPTION ===== */
-.event-desc {
-  text-align: center;
-  padding: 0.5rem 1.5rem 0;
   max-width: 500px;
-  margin: 0 auto;
-}
-.event-desc p {
-  font-size: clamp(0.8rem, 2.5vw, 0.95rem);
-  color: var(--text-dim);
-  line-height: 1.6;
+  width: 90%;
 }
 
-/* ===== MAIN TITLE BLOCK ===== */
-.main-title-block {
-  text-align: center;
-  padding: 1.5rem 1.5rem 1rem;
-}
+/* ===== HERO TITLE ===== */
 .hero-title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 8vw, 3.5rem);
@@ -200,6 +164,25 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+}
+
+/* ===== CITIES BAR ===== */
+.cities-bar {
+  font-family: var(--font-body);
+  font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  margin-top: 0.6rem;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+}
+
+/* ===== EVENT DESCRIPTION ===== */
+.event-desc {
+  font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-top: 0.75rem;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
 }
 
 /* ===== VOTING RESULTS ===== */
