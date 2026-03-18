@@ -273,23 +273,44 @@ function initScrollFade() {
 
 // ---------- EVENT PHOTOS ----------
 function initEventPhotos() {
-  const allPhotos = [
-    'assets/event/Tokyo_Event_Horizon_1.jpg',
-    'assets/event/Tokyo_Event_Horizon_2.jpg',
-    'assets/event/Tokyo_Event_Horizon_3.jpg',
-  ];
+  const eventPhotos = {
+    'Tokyo': [
+      'assets/event/tokyo/Tokyo_Event_Horizon_1.jpg',
+      'assets/event/tokyo/Tokyo_Event_Horizon_2.jpg',
+      'assets/event/tokyo/Tokyo_Event_Horizon_3.jpg',
+    ],
+    // Add more locations here, e.g.:
+    // 'Dublin': ['assets/event/dublin/photo1.jpg'],
+  };
+
+  // Flatten all photos with their location
+  const allPhotos = [];
+  for (const [location, photos] of Object.entries(eventPhotos)) {
+    photos.forEach(src => allPhotos.push({ src, location }));
+  }
+
   // Shuffle and pick 3
   const shuffled = allPhotos.sort(() => Math.random() - 0.5);
   const selected = shuffled.slice(0, 3);
   const container = $('#photoScroll');
   if (!container) return;
-  selected.forEach((src, i) => {
+  selected.forEach((photo, i) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'photo-card';
+
     const img = document.createElement('img');
-    img.src = src;
-    img.alt = 'Event photo ' + (i + 1);
+    img.src = photo.src;
+    img.alt = photo.location + ' event photo';
     img.className = 'photo-item';
     img.loading = 'lazy';
-    container.appendChild(img);
+
+    const label = document.createElement('span');
+    label.className = 'photo-location';
+    label.textContent = photo.location;
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(label);
+    container.appendChild(wrapper);
   });
 }
 
