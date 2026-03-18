@@ -12,73 +12,81 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=24">
+  <link rel="stylesheet" href="style.css?v=26">
 </head>
 <body>
-  <div class="bg-blackhole" aria-hidden="true"></div>
 
-  <!-- ===== HERO + RESULTS (inside the black hole) ===== -->
+  <!-- ===== HERO: Blackhole Visual ===== -->
   <section id="hero" class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-locations">Dublin &middot; Tokyo &middot; Seoul &middot; Melbourne &middot; San Diego &middot; Amsterdam &middot; Osaka</p>
-      <h1 class="hero-title">Event Horizon</h1>
-      <p class="hero-tagline">by Acaia</p>
-
-      <!-- QR voting buttons (only visible to QR scanners) -->
-      <div class="qr-vote" id="qrVote" hidden>
-        <p class="qr-vote-prompt">Would Horizon make your coffee better?</p>
-        <div class="qr-vote-buttons">
-          <button class="btn btn-vote btn-vote-yes" id="btnVoteYes">Better with Horizon</button>
-          <button class="btn btn-vote btn-vote-no" id="btnVoteNo">Can't tell</button>
-        </div>
-      </div>
-
-      <!-- QR vote confirmation -->
-      <div class="qr-confirm" id="qrConfirm" hidden>
-        <div class="qr-confirm-icon">&#10003;</div>
-        <p class="qr-confirm-text">Your vote has been recorded!</p>
-      </div>
-
-      <div class="hero-results">
-        <p class="results-question">Would Horizon make your coffee better?</p>
-
-        <div class="result-bars">
-          <div class="bar-group">
-            <div class="bar-label">
-              <span class="bar-name">Better with Horizon</span>
-              <span class="bar-pct" id="pctTasteYes">0%</span>
-            </div>
-            <div class="bar-track">
-              <div class="bar-fill bar-fill-yes" id="barTasteYes" style="width:0%"></div>
-            </div>
-          </div>
-          <div class="bar-group">
-            <div class="bar-label">
-              <span class="bar-name">Can't tell the difference</span>
-              <span class="bar-pct" id="pctTasteNo">0%</span>
-            </div>
-            <div class="bar-track">
-              <div class="bar-fill bar-fill-no" id="barTasteNo" style="width:0%"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mini-stats mini-stats-2">
-          <div class="stat-card">
-            <span class="stat-number" id="totalTasting">0</span>
-            <span class="stat-desc">Votes</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number" id="tastingPctYes">0%</span>
-            <span class="stat-desc">Approval</span>
-          </div>
-        </div>
-      </div>
-
-      <p class="hero-brand-line">Horizon<br>Pressure is not merely atmospheric&mdash;it is sensory.</p>
+    <div class="blackhole-circle">
+      <span class="blackhole-votes" id="totalVotesCircle">0 votes</span>
     </div>
   </section>
+
+  <!-- ===== CITIES ===== -->
+  <div class="cities-bar">
+    Dublin &middot; Tokyo &middot; Seoul &middot; Melbourne &middot; San Diego &middot; Amsterdam &middot; Osaka
+  </div>
+
+  <!-- ===== EVENT DESCRIPTION ===== -->
+  <div class="event-desc">
+    <p>Event Horizon is Acaia's latest innovation in the coffee industry to make your coffee better after extraction.</p>
+  </div>
+
+  <!-- ===== TITLE ===== -->
+  <div class="main-title-block">
+    <h1 class="hero-title">Event Horizon</h1>
+    <p class="hero-tagline">by Acaia</p>
+  </div>
+
+  <!-- ===== VOTING RESULTS ===== -->
+  <section class="vote-results-section">
+    <!-- QR voting buttons (only visible to QR scanners) -->
+    <div class="qr-vote" id="qrVote" hidden>
+      <p class="qr-vote-prompt">Would Horizon make your coffee better?</p>
+      <div class="qr-vote-buttons">
+        <button class="btn btn-vote btn-vote-yes" id="btnVoteYes">Better with Horizon</button>
+        <button class="btn btn-vote btn-vote-no" id="btnVoteNo">Can't tell</button>
+      </div>
+    </div>
+
+    <!-- QR vote confirmation -->
+    <div class="qr-confirm" id="qrConfirm" hidden>
+      <div class="qr-confirm-icon">&#10003;</div>
+      <p class="qr-confirm-text">Your vote has been recorded!</p>
+    </div>
+
+    <div class="vote-box">
+      <p class="results-question">Would Horizon make your coffee better?</p>
+      <span class="vote-box-count" id="totalTasting">0 votes</span>
+
+      <div class="result-bars">
+        <div class="bar-group">
+          <div class="bar-label">
+            <span class="bar-name">Better with Horizon</span>
+            <span class="bar-pct" id="pctTasteYes">0%</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill bar-fill-yes" id="barTasteYes" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label">
+            <span class="bar-name">Can't tell the difference</span>
+            <span class="bar-pct" id="pctTasteNo">0%</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill bar-fill-no" id="barTasteNo" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TAGLINE ===== -->
+  <div class="tagline-block">
+    <p><em>Pressure is not merely atmospheric&mdash;it is sensory.</em></p>
+  </div>
 
   <!-- ===== SHARE TO WIN ===== -->
   <section id="giveaway" class="section giveaway">
@@ -160,7 +168,7 @@
   <section id="highlights" class="section highlights">
     <h2 class="section-title">Event Highlights</h2>
     <div class="photo-scroll" id="photoScroll"></div>
-    <p class="brand-blurb"><strong>Horizon</strong><br>Pressure is not merely atmospheric&mdash;it is sensory.<br>Discover the extraordinary in every cup.</p>
+    <p class="brand-blurb"><strong>Horizon &mdash; Beyond Every Sip.</strong><br>Discover the extraordinary in every cup.</p>
   </section>
 
   <!-- ===== FOOTER ===== -->

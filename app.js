@@ -22,14 +22,12 @@ const $$ = (sel) => document.querySelectorAll(sel);
 let els = {};
 function initEls() {
   els = {
-    totalHero:   $('#totalVotesHero'),
-    refreshNote: $('#refreshNote'),
+    totalVotesCircle: $('#totalVotesCircle'),
     pctTasteYes:   $('#pctTasteYes'),
     pctTasteNo:    $('#pctTasteNo'),
     barTasteYes:   $('#barTasteYes'),
     barTasteNo:    $('#barTasteNo'),
     totalTasting:  $('#totalTasting'),
-    tastingPctYes: $('#tastingPctYes'),
     qrConfirm:     $('#qrConfirm'),
     cdDays:  $('#cdDays'),
     cdHours: $('#cdHours'),
@@ -77,16 +75,17 @@ function updateUI() {
   const pTasteYes = pct(state.taste_yes, tasteTotal);
   const pTasteNo = tasteTotal > 0 ? 100 - pTasteYes : 0;
 
-  // Hero
-  animateCounter(els.totalHero, tasteTotal);
+  // Blackhole circle vote count
+  if (els.totalVotesCircle) els.totalVotesCircle.textContent = tasteTotal.toLocaleString() + ' votes';
 
   // Tasting bars
   if (els.pctTasteYes) els.pctTasteYes.textContent = pTasteYes + '%';
   if (els.pctTasteNo) els.pctTasteNo.textContent = pTasteNo + '%';
   if (els.barTasteYes) els.barTasteYes.style.width = pTasteYes + '%';
   if (els.barTasteNo) els.barTasteNo.style.width = pTasteNo + '%';
-  animateCounter(els.totalTasting, tasteTotal);
-  if (els.tastingPctYes) els.tastingPctYes.textContent = pTasteYes + '%';
+
+  // Vote box count badge
+  if (els.totalTasting) els.totalTasting.textContent = tasteTotal.toLocaleString() + ' votes';
 }
 
 // ---------- DATA FETCHING ----------
@@ -101,7 +100,7 @@ async function fetchData() {
   }
 
   try {
-    if (els.refreshNote) els.refreshNote.textContent = 'Updating...';
+    // fetching...
     const url = CONFIG.sheetUrl + (CONFIG.sheetUrl.includes('?') ? '&' : '?') + 'action=read&_t=' + Date.now();
     const res = await fetch(url);
     if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -111,7 +110,7 @@ async function fetchData() {
   } catch (err) {
     console.error('Fetch error:', err);
   } finally {
-    if (els.refreshNote) els.refreshNote.textContent = 'Refreshes every 15 seconds';
+    // fetch complete
   }
 }
 
