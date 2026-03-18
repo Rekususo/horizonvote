@@ -545,6 +545,23 @@ img { max-width: 100%; display: block; }
 .giveaway .section-title {
   color: var(--gold-light);
 }
+.prize-link {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+.prize-link a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.prize-link a:hover {
+  color: var(--gold-bright);
+}
 .giveaway-subtitle {
   font-size: 0.95rem;
   color: var(--text-dim);
