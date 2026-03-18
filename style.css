@@ -185,10 +185,19 @@ img { max-width: 100%; display: block; }
   font-size: clamp(0.7rem, 2.5vw, 1rem);
   font-weight: 400;
   color: var(--gold-light);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.4rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+}
+.hero-locations {
+  font-family: var(--font-body);
+  font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+  font-weight: 400;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
 }
 .hero-subtitle {
   font-size: 1.1rem;
