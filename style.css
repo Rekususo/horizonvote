@@ -882,18 +882,13 @@ img { max-width: 100%; display: block; }
   margin-bottom: 1.5rem;
 }
 .photo-scroll::-webkit-scrollbar { display: none; }
-.photo-placeholder {
-  flex: 0 0 200px;
-  height: 200px;
-  background: rgba(232,213,168,0.02);
+.photo-item {
+  flex: 0 0 240px;
+  height: 240px;
+  object-fit: cover;
   border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-dim);
-  font-size: 0.85rem;
   scroll-snap-align: start;
-  border: 1px dashed rgba(255,255,255,0.06);
+  border: 1px solid rgba(232,213,168,0.1);
 }
 .brand-blurb {
   font-size: 0.95rem;

@@ -271,6 +271,28 @@ function initScrollFade() {
   $$('.section').forEach(s => observer.observe(s));
 }
 
+// ---------- EVENT PHOTOS ----------
+function initEventPhotos() {
+  const allPhotos = [
+    'assets/event/Tokyo_Event_Horizon_1.jpg',
+    'assets/event/Tokyo_Event_Horizon_2.jpg',
+    'assets/event/Tokyo_Event_Horizon_3.jpg',
+  ];
+  // Shuffle and pick 3
+  const shuffled = allPhotos.sort(() => Math.random() - 0.5);
+  const selected = shuffled.slice(0, 3);
+  const container = $('#photoScroll');
+  if (!container) return;
+  selected.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Event photo ' + (i + 1);
+    img.className = 'photo-item';
+    img.loading = 'lazy';
+    container.appendChild(img);
+  });
+}
+
 // ---------- INIT ----------
 document.addEventListener('DOMContentLoaded', () => {
   initEls();
@@ -279,6 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initModal();
   initCopyLink();
   initScrollFade();
+  initEventPhotos();
 
   setInterval(fetchData, CONFIG.pollInterval);
   updateCountdown();
