@@ -136,22 +136,40 @@ async function submitVote(type) {
   }
 }
 
-// ---------- QR AUTO-VOTE ----------
+// ---------- QR VOTE ----------
 function handleQRVote() {
   const params = new URLSearchParams(window.location.search);
-  if (params.get('qr') === '1') {
-    if (sessionStorage.getItem('horizon_qr_voted')) {
-      if (els.qrConfirm) els.qrConfirm.hidden = false;
-      return;
-    }
-    submitVote('taste_yes').then(ok => {
-      if (ok && els.qrConfirm) {
-        els.qrConfirm.hidden = false;
+  if (params.get('qr') !== '1') return;
+
+  window.history.replaceState({}, '', window.location.pathname);
+
+  // Already voted this session
+  if (sessionStorage.getItem('horizon_qr_voted')) {
+    if (els.qrConfirm) els.qrConfirm.hidden = false;
+    return;
+  }
+
+  // Show vote buttons
+  const votePanel = $('#qrVote');
+  if (votePanel) votePanel.hidden = false;
+
+  const btnYes = $('#btnVoteYes');
+  const btnNo = $('#btnVoteNo');
+
+  function castVote(type) {
+    if (btnYes) btnYes.disabled = true;
+    if (btnNo) btnNo.disabled = true;
+    submitVote(type).then(ok => {
+      if (ok) {
         sessionStorage.setItem('horizon_qr_voted', '1');
+        if (votePanel) votePanel.hidden = true;
+        if (els.qrConfirm) els.qrConfirm.hidden = false;
       }
     });
-    window.history.replaceState({}, '', window.location.pathname);
   }
+
+  if (btnYes) btnYes.addEventListener('click', () => castVote('taste_yes'));
+  if (btnNo) btnNo.addEventListener('click', () => castVote('taste_no'));
 }
 
 // ---------- COUNTDOWN ----------

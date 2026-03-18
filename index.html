@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=17">
 </head>
 <body>
   <div class="bg-blackhole" aria-hidden="true"></div>
@@ -24,7 +24,16 @@
       <h1 class="hero-title">Event Horizon</h1>
       <p class="hero-tagline">by Acaia</p>
 
-      <!-- QR auto-vote confirmation -->
+      <!-- QR voting buttons (only visible to QR scanners) -->
+      <div class="qr-vote" id="qrVote" hidden>
+        <p class="qr-vote-prompt">Would Horizon make it better?</p>
+        <div class="qr-vote-buttons">
+          <button class="btn btn-vote btn-vote-yes" id="btnVoteYes">Better with Horizon</button>
+          <button class="btn btn-vote btn-vote-no" id="btnVoteNo">Can't tell</button>
+        </div>
+      </div>
+
+      <!-- QR vote confirmation -->
       <div class="qr-confirm" id="qrConfirm" hidden>
         <div class="qr-confirm-icon">&#10003;</div>
         <p class="qr-confirm-text">Your vote has been recorded!</p>
