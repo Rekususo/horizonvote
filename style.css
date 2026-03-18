@@ -149,6 +149,17 @@ img { max-width: 100%; display: block; }
   width: 90%;
 }
 
+.results-question {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  text-align: center;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+}
+
 /* Results embedded in hero — inside the black hole void */
 .hero-results {
   margin-top: 0.75rem;
@@ -195,7 +206,7 @@ img { max-width: 100%; display: block; }
   font-size: clamp(0.55rem, 1.8vw, 0.75rem);
   font-weight: 400;
   color: var(--text-dim);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   letter-spacing: 0.04em;
   text-shadow: 0 1px 6px rgba(0,0,0,0.6);
 }
