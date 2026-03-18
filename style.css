@@ -128,8 +128,8 @@ img { max-width: 100%; display: block; }
 .hero {
   position: relative;
   z-index: 1;
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 60vh;
+  min-height: 60dvh;
 }
 
 /* ===== TITLE BLOCK (below blackhole) ===== */
