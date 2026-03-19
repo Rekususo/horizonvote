@@ -198,7 +198,7 @@ img { max-width: 100%; display: block; }
 /* ===== CITIES BAR ===== */
 .cities-bar {
   font-family: var(--font-body);
-  font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+  font-size: clamp(0.8rem, 2.5vw, 0.95rem);
   color: var(--text-dim);
   letter-spacing: 0.04em;
   text-shadow: 0 1px 6px rgba(0,0,0,0.6);
