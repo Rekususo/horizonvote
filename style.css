@@ -479,11 +479,10 @@ img { max-width: 100%; display: block; }
   white-space: nowrap;
 }
 .bonus-value-accent {
-  color: var(--gold);
+  color: var(--text-dim);
 }
 .bonus-value-glow {
-  color: var(--gold-bright);
-  text-shadow: 0 0 8px rgba(232,213,168,0.3);
+  color: var(--text-dim);
 }
 .bonus-stack-note {
   font-size: 0.8rem;
