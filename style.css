@@ -124,23 +124,20 @@ img { max-width: 100%; display: block; }
   pointer-events: none;
 }
 
-/* ===== HERO (spacer for blackhole bg) ===== */
+/* ===== HERO ===== */
 .hero {
   position: relative;
   z-index: 1;
-  min-height: 60vh;
-  min-height: 60dvh;
+  min-height: 75vh;
+  min-height: 75dvh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 1.5rem;
 }
 
-/* ===== TITLE BLOCK (below blackhole) ===== */
-.title-block {
-  position: relative;
-  z-index: 1;
+.hero-content {
   text-align: center;
-  max-width: 500px;
-  width: 90%;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 1rem;
 }
 
 /* ===== HERO TITLE ===== */
@@ -165,32 +162,43 @@ img { max-width: 100%; display: block; }
   text-shadow: 0 1px 8px rgba(0,0,0,0.7);
 }
 
-/* ===== CITIES BAR ===== */
-.cities-bar {
-  font-family: var(--font-body);
-  font-size: clamp(0.55rem, 1.8vw, 0.75rem);
-  color: var(--text-dim);
-  letter-spacing: 0.04em;
-  margin-top: 0.6rem;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+/* ===== CONTENT UPPER (desc + vote + cta + cities) ===== */
+.content-upper {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 520px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
 }
 
 /* ===== EVENT DESCRIPTION ===== */
 .event-desc {
-  font-size: clamp(0.8rem, 2.5vw, 0.95rem);
-  color: var(--text-dim);
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  font-weight: 500;
+  color: var(--gold-light);
   line-height: 1.6;
-  margin-top: 0.75rem;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.7);
 }
 
-/* ===== VOTING RESULTS ===== */
-.vote-results-section {
-  position: relative;
-  z-index: 1;
-  padding: 2rem 1.5rem;
-  max-width: 520px;
-  margin: 0 auto;
+/* ===== EVENT CTA ===== */
+.event-cta {
+  font-size: clamp(0.8rem, 2.2vw, 0.9rem);
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ===== CITIES BAR ===== */
+.cities-bar {
+  font-family: var(--font-body);
+  font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
 }
 
 .vote-box {
@@ -334,20 +342,6 @@ img { max-width: 100%; display: block; }
 .qr-confirm-text {
   font-size: 0.95rem;
   color: var(--text);
-}
-
-/* ===== TAGLINE ===== */
-.tagline-block {
-  text-align: center;
-  padding: 1.5rem 1.5rem 2rem;
-  max-width: 500px;
-  margin: 0 auto;
-}
-.tagline-block p {
-  font-size: clamp(0.85rem, 2.5vw, 1rem);
-  color: var(--text-dim);
-  line-height: 1.6;
-  letter-spacing: 0.02em;
 }
 
 /* ===== GIVEAWAY ===== */

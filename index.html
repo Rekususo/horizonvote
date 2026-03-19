@@ -12,26 +12,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=31">
+  <link rel="stylesheet" href="style.css?v=32">
 </head>
 <body>
 
   <!-- ===== HERO: Blackhole Visual ===== -->
   <div class="bg-blackhole"></div>
-  <section id="hero" class="hero"></section>
-
-  <!-- ===== TITLE BLOCK (below blackhole) ===== -->
-  <div class="title-block">
-    <h1 class="hero-title">Event Horizon</h1>
-    <p class="hero-tagline">by Acaia</p>
-    <div class="cities-bar">
-      Dublin &middot; Tokyo &middot; Seoul &middot; Melbourne &middot; San Diego &middot; Amsterdam &middot; Osaka
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Event<br>Horizon</h1>
+      <p class="hero-tagline">by Acaia</p>
     </div>
-    <p class="event-desc">Event Horizon is Acaia's exclusive global tasting series featuring Horizon, our latest innovation in coffee brewing. Developed with Swiss Barista Champion Mathieu Theis, Horizon transforms post-extraction flavor and sensory experience, delivering smoother, more balanced, and intensely richer cups. Join these intimate live tastings worldwide to experience Horizon firsthand and vote on whether it truly makes your coffee better.</p>
-  </div>
+  </section>
 
-  <!-- ===== VOTING RESULTS ===== -->
-  <section class="vote-results-section">
+  <!-- ===== DESCRIPTION + VOTE + CTA ===== -->
+  <div class="content-upper">
+    <p class="event-desc">Acaia's exclusive global coffee tasting series featuring Horizon, our latest innovation developed with Swiss Barista Champion Mathieu Theis, transforming post-extraction flavor and elevating sensory experience, delivering smoother, more balanced, and intensely richer cups.</p>
+
     <!-- QR voting buttons (only visible to QR scanners) -->
     <div class="qr-vote" id="qrVote" hidden>
       <p class="qr-vote-prompt">Would Horizon make your coffee better?</p>
@@ -72,11 +69,12 @@
       </div>
       <span class="vote-box-count" id="totalTasting">0 votes</span>
     </div>
-  </section>
 
-  <!-- ===== TAGLINE ===== -->
-  <div class="tagline-block">
-    <p><em>Pressure is not merely atmospheric&mdash;it is sensory.</em></p>
+    <p class="event-cta">Join these live tastings worldwide to experience Horizon firsthand and vote on whether it truly makes your coffee better.</p>
+
+    <div class="cities-bar">
+      Dublin &middot; Tokyo &middot; Seoul &middot; Melbourne &middot; San Diego &middot; Amsterdam &middot; Osaka
+    </div>
   </div>
 
   <!-- ===== SHARE TO WIN ===== -->
