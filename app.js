@@ -4,7 +4,7 @@
 const CONFIG = {
   pollInterval: 15000,
   sheetUrl: 'https://script.google.com/macros/s/AKfycbxbjw54Gbz3d1SHnZRj6K_2zz6tnctVmaZS23uue4QHoNGZUKTjTchlt7LULTDSC31gHQ/exec',
-  countdownTarget: '2026-04-08T00:00:00',
+  countdownTarget: '2026-04-12T00:00:00',
 };
 
 // ---------- STATE ----------
