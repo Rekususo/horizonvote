@@ -2,25 +2,25 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --gold: #E8D5A8;
-  --gold-light: #F5E6C8;
-  --gold-bright: #FFF3DC;
-  --gold-dim: #B8A87A;
+  --gold: #C8B080;
+  --gold-light: #DCC898;
+  --gold-bright: #E8D8B0;
+  --gold-dim: #9A8A60;
   --teal: #5BAA8A;
   --teal-light: #7CC4A8;
-  --void: #000000;
-  --void-mid: #060608;
-  --void-card: #0C0C10;
-  --surface: #111114;
-  --surface-light: #1A1A1F;
-  --text: #F0EDE5;
-  --text-dim: #B0AAA0;
-  --white: #FFFFFF;
+  --void: #050504;
+  --void-mid: #0A0908;
+  --void-card: #0E0D0A;
+  --surface: #141210;
+  --surface-light: #1C1A16;
+  --text: #E8E4DA;
+  --text-dim: #A09880;
+  --white: #F5F0E8;
   --radius: 12px;
   --radius-sm: 8px;
-  --shadow: 0 4px 32px rgba(232,213,168,0.06);
-  --glow-sm: 0 0 12px rgba(232,213,168,0.15);
-  --glow-lg: 0 0 40px rgba(232,213,168,0.08);
+  --shadow: 0 4px 32px rgba(200,176,128,0.05);
+  --glow-sm: 0 0 12px rgba(200,176,128,0.10);
+  --glow-lg: 0 0 40px rgba(200,176,128,0.06);
   --font-heading: 'Montserrat', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
 }
