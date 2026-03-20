@@ -1,22 +1,71 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Horizon Vote</title>
-  <meta name="description" content="Live tasting results from Event Horizon. Share and win free Horizon coffee!">
-  <meta property="og:title" content="Event Horizon – Live Results">
-  <meta property="og:description" content="Would Horizon make your coffee better? See what tasters think!">
   <meta name="theme-color" content="#000000">
-  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=37">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=38">
+  <style>
+    /* Language switcher bar */
+    .lang-switcher {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      display: flex;
+      gap: 4px;
+      padding: 8px 12px;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 0 0 12px 12px;
+      max-width: 520px;
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .lang-switcher button {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 5px 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      color: #ccc;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .lang-switcher button:hover { background: rgba(255,255,255,0.15); }
+    .lang-switcher button.active {
+      background: rgba(200,176,128,0.2);
+      border-color: rgba(200,176,128,0.4);
+      color: #DCC898;
+    }
+    .hero { padding-top: 50px; }
+  </style>
 </head>
 <body>
 
-  <!-- ===== HERO: Blackhole Visual ===== -->
+  <!-- Language Switcher -->
+  <div class="lang-switcher" id="langSwitcher">
+    <button data-lang="en" class="active">EN</button>
+    <button data-lang="zh-TW">繁體中文</button>
+    <button data-lang="zh-CN">简体中文</button>
+    <button data-lang="fr">Français</button>
+    <button data-lang="es">Español</button>
+    <button data-lang="de">Deutsch</button>
+    <button data-lang="ja">日本語</button>
+    <button data-lang="ko">한국어</button>
+  </div>
+
+  <!-- ===== HERO ===== -->
   <div class="bg-blackhole"></div>
   <section id="hero" class="hero">
     <div class="hero-content">
@@ -27,30 +76,29 @@
 
   <!-- ===== DESCRIPTION + VOTE + CTA ===== -->
   <div class="content-upper">
-    <p class="event-desc">An exclusive global tasting series by Acaia. Horizon, our latest innovation co-created with Swiss Barista Champion Mathieu Theis, redefines post-extraction flavor &mdash; smoother, more balanced, and intensely richer in every cup.</p>
+    <p class="event-desc" data-i18n="event_desc"></p>
 
-    <!-- QR voting buttons (only visible to QR scanners) -->
+    <!-- QR voting buttons -->
     <div class="qr-vote" id="qrVote" hidden>
-      <p class="qr-vote-prompt">Would Horizon make your coffee better?</p>
+      <p class="qr-vote-prompt" data-i18n="vote_question"></p>
       <div class="qr-vote-buttons">
-        <button class="btn btn-vote btn-vote-yes" id="btnVoteYes">Better with Horizon</button>
-        <button class="btn btn-vote btn-vote-no" id="btnVoteNo">Can't tell</button>
+        <button class="btn btn-vote btn-vote-yes" id="btnVoteYes" data-i18n="vote_yes"></button>
+        <button class="btn btn-vote btn-vote-no" id="btnVoteNo" data-i18n="vote_no_btn"></button>
       </div>
     </div>
 
     <!-- QR vote confirmation -->
     <div class="qr-confirm" id="qrConfirm" hidden>
       <div class="qr-confirm-icon">&#10003;</div>
-      <p class="qr-confirm-text">Your vote has been recorded!</p>
+      <p class="qr-confirm-text" data-i18n="vote_recorded"></p>
     </div>
 
     <div class="vote-box">
-      <p class="results-question">Would Horizon make your coffee better?</p>
-
+      <p class="results-question" data-i18n="vote_question"></p>
       <div class="result-bars">
         <div class="bar-group">
           <div class="bar-label">
-            <span class="bar-name">Better with Horizon</span>
+            <span class="bar-name" data-i18n="vote_yes"></span>
             <span class="bar-pct" id="pctTasteYes">0%</span>
           </div>
           <div class="bar-track">
@@ -59,7 +107,7 @@
         </div>
         <div class="bar-group">
           <div class="bar-label">
-            <span class="bar-name">Can't tell the difference</span>
+            <span class="bar-name" data-i18n="vote_no"></span>
             <span class="bar-pct" id="pctTasteNo">0%</span>
           </div>
           <div class="bar-track">
@@ -70,7 +118,7 @@
       <span class="vote-box-count" id="totalTasting">0 votes</span>
     </div>
 
-    <p class="event-cta">Join these live tastings worldwide to experience Horizon firsthand and vote on whether it truly makes your coffee better.</p>
+    <p class="event-cta" data-i18n="event_cta"></p>
 
     <div class="cities-bar">
       Dublin &middot; Tokyo &middot; Seoul &middot; Melbourne &middot; San Diego &middot; Amsterdam &middot; Osaka
@@ -79,85 +127,71 @@
 
   <!-- ===== SHARE TO WIN ===== -->
   <section id="giveaway" class="section giveaway">
-    <h2 class="section-title">Share &amp; Win a Free <a href="https://acaia.co/products/horizon" target="_blank" rel="noopener" class="title-link">Horizon</a>!</h2>
-    <!-- How to Enter -->
-    <div class="rules-title-inline">To Enter</div>
+    <h2 class="section-title" data-i18n-html="giveaway_title"></h2>
+    <div class="rules-title-inline" data-i18n="to_enter"></div>
     <ol class="entry-rules">
-      <li>Follow <a href="https://www.instagram.com/acaiacoffee/?utm_source=results_page&utm_medium=giveaway" target="_blank" rel="noopener">@acaiacoffee</a></li>
-      <li>Comment &ldquo;Horizon&rdquo; and where you are located in the comment section in <a href="https://www.instagram.com/reel/DVrudeakwUs/" target="_blank" rel="noopener">this Reel</a></li>
-      <li>Tag up to three friends to add extra entries</li>
+      <li data-i18n-html="step1"></li>
+      <li data-i18n-html="step2"></li>
+      <li data-i18n="step3"></li>
     </ol>
-    <p class="giveaway-subtitle">Giveaway open worldwide&mdash;share from anywhere!</p>
+    <p class="giveaway-subtitle" data-i18n="giveaway_subtitle"></p>
 
     <!-- Entry Bonuses -->
     <div class="bonus-entries-card">
-      <p class="bonus-entries-title">Entries &amp; Bonuses</p>
+      <p class="bonus-entries-title" data-i18n="entries_bonuses"></p>
       <table class="bonus-table">
         <tr>
-          <td class="bonus-action">Comment + tag a friend</td>
-          <td class="bonus-value">1 entry</td>
+          <td class="bonus-action" data-i18n="bonus_comment_tag"></td>
+          <td class="bonus-value" data-i18n="bonus_1_entry"></td>
         </tr>
         <tr>
-          <td class="bonus-action">Tag additional friends</td>
-          <td class="bonus-value bonus-value-accent">+1 entry per tag</td>
+          <td class="bonus-action" data-i18n="bonus_additional_tags"></td>
+          <td class="bonus-value bonus-value-accent" data-i18n="bonus_plus1"></td>
         </tr>
         <tr>
-          <td class="bonus-action">Repost Reel to your story + tag <strong>@acaiacoffee</strong></td>
-          <td class="bonus-value bonus-value-glow">+5 entries</td>
+          <td class="bonus-action" data-i18n-html="bonus_repost"></td>
+          <td class="bonus-value bonus-value-glow" data-i18n="bonus_plus5"></td>
         </tr>
       </table>
-      <p class="bonus-stack-note">Entries stack! Comment with 3 tags + reel repost = <strong>9 entries!</strong></p>
+      <p class="bonus-stack-note" data-i18n-html="bonus_stack"></p>
     </div>
 
     <!-- Countdown -->
     <div class="countdown-block">
-      <p class="countdown-label">Winner Announcement</p>
+      <p class="countdown-label" data-i18n="winner_announcement"></p>
       <div class="countdown" id="countdown">
-        <div class="cd-unit"><span id="cdDays">00</span><small>days</small></div>
-        <div class="cd-unit"><span id="cdHours">00</span><small>hrs</small></div>
-        <div class="cd-unit"><span id="cdMins">00</span><small>min</small></div>
-        <div class="cd-unit"><span id="cdSecs">00</span><small>sec</small></div>
+        <div class="cd-unit"><span id="cdDays">00</span><small data-i18n="days"></small></div>
+        <div class="cd-unit"><span id="cdHours">00</span><small data-i18n="hrs"></small></div>
+        <div class="cd-unit"><span id="cdMins">00</span><small data-i18n="min"></small></div>
+        <div class="cd-unit"><span id="cdSecs">00</span><small data-i18n="sec"></small></div>
       </div>
     </div>
 
     <div class="share-tools">
       <button class="btn btn-accent share-btn" id="btnCopyLink" aria-label="Copy link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-        Share Giveaway Link
+        <span data-i18n="share_link"></span>
       </button>
-      <a href="https://www.instagram.com/reel/DVrudeakwUs/" class="btn btn-primary" target="_blank" rel="noopener">Repost Now for Bonus Entries</a>
+      <a href="https://www.instagram.com/reel/DVrudeakwUs/" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="repost_now"></a>
     </div>
 
-    <button class="link-btn" id="btnRules">View Full Rules</button>
+    <button class="link-btn" id="btnRules" data-i18n="view_rules"></button>
   </section>
 
   <!-- ===== RULES MODAL ===== -->
   <div class="modal-overlay" id="rulesModal" aria-hidden="true">
     <div class="modal" role="dialog" aria-labelledby="rulesTitle">
       <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
-      <h3 id="rulesTitle">Lucky Draw Rules</h3>
-      <ul>
-        <li>No purchase necessary.</li>
-        <li>Must follow @acaiacoffee on Instagram to qualify.</li>
-        <li>Comment on our latest Reel/post and tag at least one friend to enter.</li>
-        <li>Each additional friend tagged = +1 bonus entry (stackable).</li>
-        <li>Repost the Reel to your Story + tag @acaiacoffee for +5 bonus entries.</li>
-        <li>Winner will be selected randomly and announced on @acaiacoffee Instagram on March 31.</li>
-        <li>You must be over 18. Address must be a valid shipping address.</li>
-        <li>One entry per person. Your account must be public to enter.</li>
-        <li>Entrants from the following countries are not eligible: Iran, Lebanon, Syria, Thailand, India, Turkey, Egypt, Qatar, and Russia. These restrictions are due to current political or logistical limitations (subject to change).</li>
-        <li>This giveaway is not sponsored, endorsed, or administered by, or associated with Instagram.</li>
-        <li>Acaia reserves the right to adjust these rules at any time.</li>
-        <li>Good luck!</li>
-      </ul>
+      <h3 id="rulesTitle" data-i18n="rules_title"></h3>
+      <ul id="rulesList"></ul>
     </div>
   </div>
 
   <!-- ===== EVENT HIGHLIGHTS ===== -->
   <section id="highlights" class="section highlights">
-    <h2 class="section-title">Event Highlights</h2>
+    <h2 class="section-title" data-i18n="highlights_title"></h2>
     <div class="photo-scroll" id="photoScroll"></div>
-    <p class="brand-blurb"><strong>Horizon &mdash; Not just atmospheric, it's sensory.</strong></p>
+    <p class="brand-blurb" data-i18n-html="brand_blurb"></p>
   </section>
 
   <!-- ===== FOOTER ===== -->
@@ -168,11 +202,458 @@
       </a>
     </div>
     <p class="footer-legal">
-      <a href="#" id="footerRules">Full Rules</a> &middot; <a href="#hero">Privacy</a> &middot; No purchase necessary.
+      <a href="#" id="footerRules" data-i18n="full_rules"></a> &middot; <a href="#hero" data-i18n="privacy"></a> &middot; <span data-i18n="no_purchase"></span>
     </p>
     <p class="footer-brand">Powered by <strong>Acaia</strong></p>
   </footer>
 
   <script src="app.js"></script>
+  <script>
+  /* ===== i18n System ===== */
+  const TRANSLATIONS = {
+    en: {
+      event_desc: 'An exclusive global tasting series by Acaia. Horizon, our latest innovation co-created with Swiss Barista Champion Mathieu Theis, redefines post-extraction flavor \u2014 smoother, more balanced, and intensely richer in every cup.',
+      vote_question: 'Would Horizon make your coffee better?',
+      vote_yes: 'Better with Horizon',
+      vote_no: "Can't tell the difference",
+      vote_no_btn: "Can't tell",
+      vote_recorded: 'Your vote has been recorded!',
+      event_cta: 'Join these live tastings worldwide to experience Horizon firsthand and vote on whether it truly makes your coffee better.',
+      giveaway_title: 'Share &amp; Win a Free <a href="https://acaia.co/products/horizon" target="_blank" rel="noopener" class="title-link">Horizon</a>!',
+      to_enter: 'To Enter',
+      step1: 'Follow <a href="https://www.instagram.com/acaiacoffee/?utm_source=results_page&utm_medium=giveaway" target="_blank" rel="noopener">@acaiacoffee</a>',
+      step2: 'Comment \u201cHorizon\u201d and where you are located in the comment section in <a href="https://www.instagram.com/reel/DVrudeakwUs/" target="_blank" rel="noopener">this Reel</a>',
+      step3: 'Tag up to three friends to add extra entries',
+      giveaway_subtitle: 'Giveaway open worldwide\u2014share from anywhere!',
+      entries_bonuses: 'Entries & Bonuses',
+      bonus_comment_tag: 'Comment + tag a friend',
+      bonus_1_entry: '1 entry',
+      bonus_additional_tags: 'Tag additional friends',
+      bonus_plus1: '+1 entry per tag',
+      bonus_repost: 'Repost Reel to your story + tag <strong>@acaiacoffee</strong>',
+      bonus_plus5: '+5 entries',
+      bonus_stack: 'Entries stack! Comment with 3 tags + reel repost = <strong>9 entries!</strong>',
+      winner_announcement: 'Winner Announcement',
+      days: 'days', hrs: 'hrs', min: 'min', sec: 'sec',
+      share_link: 'Share Giveaway Link',
+      repost_now: 'Repost Now for Bonus Entries',
+      view_rules: 'View Full Rules',
+      rules_title: 'Lucky Draw Rules',
+      rules: [
+        'No purchase necessary.',
+        'Must follow @acaiacoffee on Instagram to qualify.',
+        'Comment on our latest Reel/post and tag at least one friend to enter.',
+        'Each additional friend tagged = +1 bonus entry (stackable).',
+        'Repost the Reel to your Story + tag @acaiacoffee for +5 bonus entries.',
+        'Winner will be selected randomly and announced on @acaiacoffee Instagram on March 31.',
+        'You must be over 18. Address must be a valid shipping address.',
+        'One entry per person. Your account must be public to enter.',
+        'Entrants from the following countries are not eligible: Iran, Lebanon, Syria, Thailand, India, Turkey, Egypt, Qatar, and Russia. These restrictions are due to current political or logistical limitations (subject to change).',
+        'This giveaway is not sponsored, endorsed, or administered by, or associated with Instagram.',
+        'Acaia reserves the right to adjust these rules at any time.',
+        'Good luck!'
+      ],
+      highlights_title: 'Event Highlights',
+      brand_blurb: '<strong>Horizon \u2014 Not just atmospheric, it\'s sensory.</strong>',
+      full_rules: 'Full Rules',
+      privacy: 'Privacy',
+      no_purchase: 'No purchase necessary.',
+      votes_suffix: 'votes'
+    },
+    'zh-TW': {
+      event_desc: 'Acaia 獨家全球品鑑系列活動。Horizon 是我們與瑞士咖啡師冠軍 Mathieu Theis 共同研發的最新創新，重新定義萃取後的風味體驗 \u2014 更柔順、更均衡、每一杯都更加濃郁醇厚。',
+      vote_question: 'Horizon 能讓你的咖啡更好嗎？',
+      vote_yes: '使用 Horizon 更好',
+      vote_no: '感覺不出差異',
+      vote_no_btn: '感覺不出',
+      vote_recorded: '您的投票已記錄！',
+      event_cta: '加入全球各地的現場品鑑活動，親身體驗 Horizon，並投票決定它是否真的讓你的咖啡更好。',
+      giveaway_title: '分享並贏取免費 <a href="https://acaia.co/products/horizon" target="_blank" rel="noopener" class="title-link">Horizon</a>！',
+      to_enter: '參加方式',
+      step1: '追蹤 <a href="https://www.instagram.com/acaiacoffee/?utm_source=results_page&utm_medium=giveaway" target="_blank" rel="noopener">@acaiacoffee</a>',
+      step2: '在<a href="https://www.instagram.com/reel/DVrudeakwUs/" target="_blank" rel="noopener">這支 Reel</a> 的留言區留言「Horizon」以及你所在的城市',
+      step3: '標記最多三位朋友以獲得額外參加機會',
+      giveaway_subtitle: '全球開放參與 \u2014 隨時隨地分享！',
+      entries_bonuses: '參加次數與加碼',
+      bonus_comment_tag: '留言 + 標記一位朋友',
+      bonus_1_entry: '1 次參加機會',
+      bonus_additional_tags: '標記更多朋友',
+      bonus_plus1: '每標記一人 +1 次',
+      bonus_repost: '轉發 Reel 到限時動態 + 標記 <strong>@acaiacoffee</strong>',
+      bonus_plus5: '+5 次參加機會',
+      bonus_stack: '機會可累計！留言標記 3 位 + 轉發 Reel = <strong>9 次參加機會！</strong>',
+      winner_announcement: '得獎公佈',
+      days: '天', hrs: '時', min: '分', sec: '秒',
+      share_link: '分享抽獎連結',
+      repost_now: '立即轉發獲得加碼機會',
+      view_rules: '查看完整規則',
+      rules_title: '抽獎規則',
+      rules: [
+        '無需購買。',
+        '須在 Instagram 追蹤 @acaiacoffee 才具備資格。',
+        '在我們最新的 Reel/貼文下留言並標記至少一位朋友即可參加。',
+        '每多標記一位朋友 = +1 次額外參加機會（可累計）。',
+        '將 Reel 轉發至限時動態 + 標記 @acaiacoffee 可獲得 +5 次額外參加機會。',
+        '得獎者將隨機抽出，並於 3 月 31 日在 @acaiacoffee Instagram 公佈。',
+        '參加者須年滿 18 歲。地址須為有效的寄送地址。',
+        '每人限參加一次。帳號須設為公開。',
+        '以下國家的參加者不具備資格：伊朗、黎巴嫩、敘利亞、泰國、印度、土耳其、埃及、卡達和俄羅斯。此限制係因政治或物流因素（可能變更）。',
+        '本活動非由 Instagram 贊助、背書、管理或關聯。',
+        'Acaia 保留隨時調整本規則的權利。',
+        '祝好運！'
+      ],
+      highlights_title: '活動精彩回顧',
+      brand_blurb: '<strong>Horizon \u2014 不只是氛圍，更是感官體驗。</strong>',
+      full_rules: '完整規則',
+      privacy: '隱私權',
+      no_purchase: '無需購買。',
+      votes_suffix: '票'
+    },
+    'zh-CN': {
+      event_desc: 'Acaia 独家全球品鉴系列活动。Horizon 是我们与瑞士咖啡师冠军 Mathieu Theis 共同研发的最新创新，重新定义萃取后的风味体验 \u2014 更柔顺、更均衡、每一杯都更加浓郁醇厚。',
+      vote_question: 'Horizon 能让你的咖啡更好吗？',
+      vote_yes: '使用 Horizon 更好',
+      vote_no: '感觉不出差异',
+      vote_no_btn: '感觉不出',
+      vote_recorded: '您的投票已记录！',
+      event_cta: '加入全球各地的现场品鉴活动，亲身体验 Horizon，并投票决定它是否真的让你的咖啡更好。',
+      giveaway_title: '分享并赢取免费 <a href="https://acaia.co/products/horizon" target="_blank" rel="noopener" class="title-link">Horizon</a>！',
+      to_enter: '参加方式',
+      step1: '关注 <a href="https://www.instagram.com/acaiacoffee/?utm_source=results_page&utm_medium=giveaway" target="_blank" rel="noopener">@acaiacoffee</a>',
+      step2: '在<a href="https://www.instagram.com/reel/DVrudeakwUs/" target="_blank" rel="noopener">这条 Reel</a> 的评论区留言「Horizon」以及你所在的城市',
+      step3: '标记最多三位朋友以获得额外参加机会',
+      giveaway_subtitle: '全球开放参与 \u2014 随时随地分享！',
+      entries_bonuses: '参加次数与加码',
+      bonus_comment_tag: '留言 + 标记一位朋友',
+      bonus_1_entry: '1 次参加机会',
+      bonus_additional_tags: '标记更多朋友',
+      bonus_plus1: '每标记一人 +1 次',
+      bonus_repost: '转发 Reel 到限时动态 + 标记 <strong>@acaiacoffee</strong>',
+      bonus_plus5: '+5 次参加机会',
+      bonus_stack: '机会可累计！留言标记 3 位 + 转发 Reel = <strong>9 次参加机会！</strong>',
+      winner_announcement: '获奖公布',
+      days: '天', hrs: '时', min: '分', sec: '秒',
+      share_link: '分享抽奖链接',
+      repost_now: '立即转发获得加码机会',
+      view_rules: '查看完整规则',
+      rules_title: '抽奖规则',
+      rules: [
+        '无需购买。',
+        '须在 Instagram 关注 @acaiacoffee 才具备资格。',
+        '在我们最新的 Reel/帖子下留言并标记至少一位朋友即可参加。',
+        '每多标记一位朋友 = +1 次额外参加机会（可累计）。',
+        '将 Reel 转发至限时动态 + 标记 @acaiacoffee 可获得 +5 次额外参加机会。',
+        '获奖者将随机抽出，并于 3 月 31 日在 @acaiacoffee Instagram 公布。',
+        '参加者须年满 18 岁。地址须为有效的寄送地址。',
+        '每人限参加一次。账号须设为公开。',
+        '以下国家的参加者不具备资格：伊朗、黎巴嫩、叙利亚、泰国、印度、土耳其、埃及、卡塔尔和俄罗斯。此限制系因政治或物流因素（可能变更）。',
+        '本活动非由 Instagram 赞助、背书、管理或关联。',
+        'Acaia 保留随时调整本规则的权利。',
+        '祝好运！'
+      ],
+      highlights_title: '活动精彩回顾',
+      brand_blurb: '<strong>Horizon \u2014 不只是氛围，更是感官体验。</strong>',
+      full_rules: '完整规则',
+      privacy: '隐私',
+      no_purchase: '无需购买。',
+      votes_suffix: '票'
+    },
+    fr: {
+      event_desc: "Une s\u00e9rie de d\u00e9gustations mondiales exclusives par Acaia. Horizon, notre derni\u00e8re innovation co-cr\u00e9\u00e9e avec le Champion Barista Suisse Mathieu Theis, red\u00e9finit la saveur post-extraction \u2014 plus douce, plus \u00e9quilibr\u00e9e et intensément plus riche dans chaque tasse.",
+      vote_question: 'Horizon am\u00e9liorerait-il votre caf\u00e9 ?',
+      vote_yes: 'Meilleur avec Horizon',
+      vote_no: 'Pas de diff\u00e9rence',
+      vote_no_btn: 'Pas de diff\u00e9rence',
+      vote_recorded: 'Votre vote a \u00e9t\u00e9 enregistr\u00e9 !',
+      event_cta: "Participez \u00e0 ces d\u00e9gustations en direct dans le monde entier pour d\u00e9couvrir Horizon et votez pour savoir s'il am\u00e9liore vraiment votre caf\u00e9.",
+      giveaway_title: 'Partagez et gagnez un <a href="https://acaia.co/products/horizon" target="_blank" rel="noopener" class="title-link">Horizon</a> gratuit !',
+      to_enter: 'Comment participer',
+      step1: 'Suivez <a href="https://www.instagram.com/acaiacoffee/?utm_source=results_page&utm_medium=giveaway" target="_blank" rel="noopener">@acaiacoffee</a>',
+      step2: 'Commentez \u00ab Horizon \u00bb et indiquez o\u00f9 vous vous trouvez dans les commentaires de <a href="https://www.instagram.com/reel/DVrudeakwUs/" target="_blank" rel="noopener">ce Reel</a>',
+      step3: "Identifiez jusqu'\u00e0 trois amis pour obtenir des participations suppl\u00e9mentaires",
+      giveaway_subtitle: 'Concours ouvert dans le monde entier \u2014 partagez depuis n\u2019importe o\u00f9 !',
+      entries_bonuses: 'Participations et bonus',
+      bonus_comment_tag: 'Commentaire + identifier un ami',
+      bonus_1_entry: '1 participation',
+      bonus_additional_tags: 'Identifier des amis suppl\u00e9mentaires',
+      bonus_plus1: '+1 participation par identification',
+      bonus_repost: 'Reposter le Reel en story + identifier <strong>@acaiacoffee</strong>',
+      bonus_plus5: '+5 participations',
+      bonus_stack: 'Les participations se cumulent ! Commentaire avec 3 identifications + repost du Reel = <strong>9 participations !</strong>',
+      winner_announcement: 'Annonce du gagnant',
+      days: 'jours', hrs: 'hrs', min: 'min', sec: 'sec',
+      share_link: 'Partager le lien du concours',
+      repost_now: 'Reposter pour des participations bonus',
+      view_rules: 'Voir les r\u00e8gles compl\u00e8tes',
+      rules_title: 'R\u00e8gles du tirage au sort',
+      rules: [
+        "Aucun achat n\u00e9cessaire.",
+        "Vous devez suivre @acaiacoffee sur Instagram pour participer.",
+        "Commentez notre dernier Reel/post et identifiez au moins un ami pour participer.",
+        "Chaque ami identifi\u00e9 en plus = +1 participation bonus (cumulable).",
+        "Repostez le Reel dans votre Story + identifiez @acaiacoffee pour +5 participations bonus.",
+        "Le gagnant sera s\u00e9lectionn\u00e9 al\u00e9atoirement et annonc\u00e9 sur le Instagram de @acaiacoffee le 31 mars.",
+        "Vous devez avoir plus de 18 ans. L'adresse doit \u00eatre une adresse de livraison valide.",
+        "Une participation par personne. Votre compte doit \u00eatre public pour participer.",
+        "Les participants des pays suivants ne sont pas \u00e9ligibles : Iran, Liban, Syrie, Tha\u00eflande, Inde, Turquie, \u00c9gypte, Qatar et Russie. Ces restrictions sont dues \u00e0 des limitations politiques ou logistiques actuelles (susceptibles de changer).",
+        "Ce concours n'est ni sponsoris\u00e9, ni endoss\u00e9, ni administr\u00e9 par, ni associ\u00e9 \u00e0 Instagram.",
+        "Acaia se r\u00e9serve le droit de modifier ces r\u00e8gles \u00e0 tout moment.",
+        "Bonne chance !"
+      ],
+      highlights_title: 'Temps forts de l\u2019\u00e9v\u00e9nement',
+      brand_blurb: '<strong>Horizon \u2014 Pas seulement atmosph\u00e9rique, c\u2019est sensoriel.</strong>',
+      full_rules: 'R\u00e8gles compl\u00e8tes',
+      privacy: 'Confidentialit\u00e9',
+      no_purchase: 'Aucun achat n\u00e9cessaire.',
+      votes_suffix: 'votes'
+    },
+    es: {
+      event_desc: 'Una serie exclusiva de degustaciones globales de Acaia. Horizon, nuestra \u00faltima innovaci\u00f3n co-creada con el Campe\u00f3n Barista Suizo Mathieu Theis, redefine el sabor post-extracci\u00f3n \u2014 m\u00e1s suave, m\u00e1s equilibrado e intensamente m\u00e1s rico en cada taza.',
+      vote_question: '\u00bfHorizon mejorar\u00eda tu caf\u00e9?',
+      vote_yes: 'Mejor con Horizon',
+      vote_no: 'No noto la diferencia',
+      vote_no_btn: 'No noto',
+      vote_recorded: '\u00a1Tu voto ha sido registrado!',
+      event_cta: '\u00danete a estas degustaciones en vivo en todo el mundo para experimentar Horizon de primera mano y vota si realmente mejora tu caf\u00e9.',
+      giveaway_title: '\u00a1Comparte y gana un <a href="https://acaia.co/products/horizon" target="_blank" rel="noopener" class="title-link">Horizon</a> gratis!',
+      to_enter: 'C\u00f3mo participar',
+      step1: 'Sigue a <a href="https://www.instagram.com/acaiacoffee/?utm_source=results_page&utm_medium=giveaway" target="_blank" rel="noopener">@acaiacoffee</a>',
+      step2: 'Comenta \u00abHorizon\u00bb y d\u00f3nde te encuentras en los comentarios de <a href="https://www.instagram.com/reel/DVrudeakwUs/" target="_blank" rel="noopener">este Reel</a>',
+      step3: 'Etiqueta hasta tres amigos para obtener participaciones extra',
+      giveaway_subtitle: 'Sorteo abierto en todo el mundo \u2014 \u00a1comparte desde cualquier lugar!',
+      entries_bonuses: 'Participaciones y bonos',
+      bonus_comment_tag: 'Comentario + etiquetar a un amigo',
+      bonus_1_entry: '1 participaci\u00f3n',
+      bonus_additional_tags: 'Etiquetar amigos adicionales',
+      bonus_plus1: '+1 participaci\u00f3n por etiqueta',
+      bonus_repost: 'Repostear el Reel en tu historia + etiquetar <strong>@acaiacoffee</strong>',
+      bonus_plus5: '+5 participaciones',
+      bonus_stack: '\u00a1Las participaciones se acumulan! Comentario con 3 etiquetas + repost del Reel = <strong>\u00a19 participaciones!</strong>',
+      winner_announcement: 'Anuncio del ganador',
+      days: 'd\u00edas', hrs: 'hrs', min: 'min', sec: 'seg',
+      share_link: 'Compartir enlace del sorteo',
+      repost_now: 'Repostear ahora para participaciones bonus',
+      view_rules: 'Ver reglas completas',
+      rules_title: 'Reglas del sorteo',
+      rules: [
+        'No es necesaria ninguna compra.',
+        'Debes seguir a @acaiacoffee en Instagram para participar.',
+        'Comenta en nuestro \u00faltimo Reel/post y etiqueta al menos a un amigo para participar.',
+        'Cada amigo adicional etiquetado = +1 participaci\u00f3n bonus (acumulable).',
+        'Repostea el Reel en tu Story + etiqueta a @acaiacoffee para +5 participaciones bonus.',
+        'El ganador ser\u00e1 seleccionado al azar y anunciado en el Instagram de @acaiacoffee el 31 de marzo.',
+        'Debes ser mayor de 18 a\u00f1os. La direcci\u00f3n debe ser una direcci\u00f3n de env\u00edo v\u00e1lida.',
+        'Una participaci\u00f3n por persona. Tu cuenta debe ser p\u00fablica para participar.',
+        'Los participantes de los siguientes pa\u00edses no son elegibles: Ir\u00e1n, L\u00edbano, Siria, Tailandia, India, Turqu\u00eda, Egipto, Catar y Rusia. Estas restricciones se deben a limitaciones pol\u00edticas o log\u00edsticas actuales (sujetas a cambios).',
+        'Este sorteo no est\u00e1 patrocinado, respaldado, administrado ni asociado con Instagram.',
+        'Acaia se reserva el derecho de ajustar estas reglas en cualquier momento.',
+        '\u00a1Buena suerte!'
+      ],
+      highlights_title: 'Momentos destacados',
+      brand_blurb: '<strong>Horizon \u2014 No solo atmosf\u00e9rico, es sensorial.</strong>',
+      full_rules: 'Reglas completas',
+      privacy: 'Privacidad',
+      no_purchase: 'No es necesaria ninguna compra.',
+      votes_suffix: 'votos'
+    },
+    de: {
+      event_desc: 'Eine exklusive globale Verkostungsserie von Acaia. Horizon, unsere neueste Innovation in Zusammenarbeit mit dem Schweizer Barista-Champion Mathieu Theis, definiert das Post-Extraktions-Aroma neu \u2014 sanfter, ausgewogener und intensiv reichhaltiger in jeder Tasse.',
+      vote_question: 'W\u00fcrde Horizon deinen Kaffee besser machen?',
+      vote_yes: 'Besser mit Horizon',
+      vote_no: 'Kein Unterschied',
+      vote_no_btn: 'Kein Unterschied',
+      vote_recorded: 'Deine Stimme wurde erfasst!',
+      event_cta: 'Nimm an diesen Live-Verkostungen weltweit teil, um Horizon aus erster Hand zu erleben, und stimme ab, ob es deinen Kaffee wirklich besser macht.',
+      giveaway_title: 'Teilen &amp; einen kostenlosen <a href="https://acaia.co/products/horizon" target="_blank" rel="noopener" class="title-link">Horizon</a> gewinnen!',
+      to_enter: 'So nimmst du teil',
+      step1: 'Folge <a href="https://www.instagram.com/acaiacoffee/?utm_source=results_page&utm_medium=giveaway" target="_blank" rel="noopener">@acaiacoffee</a>',
+      step2: 'Kommentiere \u201eHorizon\u201c und deinen Standort in den Kommentaren von <a href="https://www.instagram.com/reel/DVrudeakwUs/" target="_blank" rel="noopener">diesem Reel</a>',
+      step3: 'Markiere bis zu drei Freunde f\u00fcr zus\u00e4tzliche Teilnahmen',
+      giveaway_subtitle: 'Gewinnspiel weltweit offen \u2014 teile von \u00fcberall!',
+      entries_bonuses: 'Teilnahmen & Boni',
+      bonus_comment_tag: 'Kommentar + einen Freund markieren',
+      bonus_1_entry: '1 Teilnahme',
+      bonus_additional_tags: 'Weitere Freunde markieren',
+      bonus_plus1: '+1 Teilnahme pro Markierung',
+      bonus_repost: 'Reel in deiner Story reposten + <strong>@acaiacoffee</strong> markieren',
+      bonus_plus5: '+5 Teilnahmen',
+      bonus_stack: 'Teilnahmen stapeln sich! Kommentar mit 3 Markierungen + Reel-Repost = <strong>9 Teilnahmen!</strong>',
+      winner_announcement: 'Gewinner-Bekanntgabe',
+      days: 'Tage', hrs: 'Std', min: 'Min', sec: 'Sek',
+      share_link: 'Gewinnspiel-Link teilen',
+      repost_now: 'Jetzt reposten f\u00fcr Bonus-Teilnahmen',
+      view_rules: 'Vollst\u00e4ndige Regeln',
+      rules_title: 'Gewinnspiel-Regeln',
+      rules: [
+        'Kein Kauf erforderlich.',
+        'Du musst @acaiacoffee auf Instagram folgen, um teilzunehmen.',
+        'Kommentiere unser neuestes Reel/Post und markiere mindestens einen Freund zur Teilnahme.',
+        'Jeder zus\u00e4tzlich markierte Freund = +1 Bonus-Teilnahme (kumulierbar).',
+        'Reposte das Reel in deiner Story + markiere @acaiacoffee f\u00fcr +5 Bonus-Teilnahmen.',
+        'Der Gewinner wird zuf\u00e4llig ausgew\u00e4hlt und am 31. M\u00e4rz auf dem @acaiacoffee Instagram bekanntgegeben.',
+        'Du musst \u00fcber 18 Jahre alt sein. Die Adresse muss eine g\u00fcltige Lieferadresse sein.',
+        'Eine Teilnahme pro Person. Dein Konto muss \u00f6ffentlich sein.',
+        'Teilnehmer aus folgenden L\u00e4ndern sind nicht berechtigt: Iran, Libanon, Syrien, Thailand, Indien, T\u00fcrkei, \u00c4gypten, Katar und Russland. Diese Einschr\u00e4nkungen bestehen aufgrund aktueller politischer oder logistischer Gegebenheiten (\u00c4nderungen vorbehalten).',
+        'Dieses Gewinnspiel wird nicht von Instagram gesponsert, unterst\u00fctzt, verwaltet oder ist damit verbunden.',
+        'Acaia beh\u00e4lt sich das Recht vor, diese Regeln jederzeit anzupassen.',
+        'Viel Gl\u00fcck!'
+      ],
+      highlights_title: 'Event-Highlights',
+      brand_blurb: '<strong>Horizon \u2014 Nicht nur atmosph\u00e4risch, sondern sinnlich.</strong>',
+      full_rules: 'Vollst\u00e4ndige Regeln',
+      privacy: 'Datenschutz',
+      no_purchase: 'Kein Kauf erforderlich.',
+      votes_suffix: 'Stimmen'
+    },
+    ja: {
+      event_desc: 'Acaiaによる特別なグローバルテイスティングシリーズ。スイスバリスタチャンピオン Mathieu Theis と共同開発した最新イノベーション Horizon は、抽出後のフレーバーを再定義します \u2014 より滑らかでバランスの取れた、驚くほど豊かな味わいの一杯を実現。',
+      vote_question: 'Horizonでコーヒーの味は良くなりましたか？',
+      vote_yes: 'Horizon\u3067\u3088\u308a\u7f8e\u5473\u3057\u3044',
+      vote_no: '\u9055\u3044\u304c\u308f\u304b\u3089\u306a\u3044',
+      vote_no_btn: '\u308f\u304b\u3089\u306a\u3044',
+      vote_recorded: '\u6295\u7968\u304c\u8a18\u9332\u3055\u308c\u307e\u3057\u305f\uff01',
+      event_cta: '\u4e16\u754c\u5404\u5730\u306e\u30e9\u30a4\u30d6\u30c6\u30a4\u30b9\u30c6\u30a3\u30f3\u30b0\u306b\u53c2\u52a0\u3057\u3066Horizon\u3092\u4f53\u9a13\u3057\u3001\u672c\u5f53\u306b\u30b3\u30fc\u30d2\u30fc\u304c\u7f8e\u5473\u3057\u304f\u306a\u308b\u304b\u6295\u7968\u3057\u3066\u304f\u3060\u3055\u3044\u3002',
+      giveaway_title: '\u30b7\u30a7\u30a2\u3057\u3066\u7121\u6599\u306e<a href="https://acaia.co/products/horizon" target="_blank" rel="noopener" class="title-link">Horizon</a>\u3092\u7372\u5f97\uff01',
+      to_enter: '\u53c2\u52a0\u65b9\u6cd5',
+      step1: '<a href="https://www.instagram.com/acaiacoffee/?utm_source=results_page&utm_medium=giveaway" target="_blank" rel="noopener">@acaiacoffee</a> \u3092\u30d5\u30a9\u30ed\u30fc',
+      step2: '<a href="https://www.instagram.com/reel/DVrudeakwUs/" target="_blank" rel="noopener">\u3053\u306eReel</a>\u306e\u30b3\u30e1\u30f3\u30c8\u6b04\u306b\u300cHorizon\u300d\u3068\u3042\u306a\u305f\u306e\u5834\u6240\u3092\u30b3\u30e1\u30f3\u30c8',
+      step3: '\u6700\u5927 3 \u4eba\u306e\u53cb\u9054\u3092\u30bf\u30b0\u3057\u3066\u8ffd\u52a0\u30a8\u30f3\u30c8\u30ea\u30fc\u3092\u7372\u5f97',
+      giveaway_subtitle: '\u4e16\u754c\u4e2d\u304b\u3089\u53c2\u52a0\u53ef\u80fd \u2014 \u3069\u3053\u304b\u3089\u3067\u3082\u30b7\u30a7\u30a2\uff01',
+      entries_bonuses: '\u30a8\u30f3\u30c8\u30ea\u30fc\uff06\u30dc\u30fc\u30ca\u30b9',
+      bonus_comment_tag: '\u30b3\u30e1\u30f3\u30c8 + \u53cb\u9054\u3092\u30bf\u30b0',
+      bonus_1_entry: '1エントリー',
+      bonus_additional_tags: '\u8ffd\u52a0\u306e\u53cb\u9054\u3092\u30bf\u30b0',
+      bonus_plus1: '\u30bf\u30b0 1 \u4eba\u3054\u3068\u306b +1',
+      bonus_repost: 'Reel\u3092\u30b9\u30c8\u30fc\u30ea\u30fc\u306b\u30ea\u30dd\u30b9\u30c8 + <strong>@acaiacoffee</strong> \u3092\u30bf\u30b0',
+      bonus_plus5: '+5 \u30a8\u30f3\u30c8\u30ea\u30fc',
+      bonus_stack: '応募数は加算方式！3人タグ + Reelリポスト = <strong>9エントリー！</strong>',
+      winner_announcement: '\u5f53\u9078\u8005\u767a\u8868',
+      days: '\u65e5', hrs: '\u6642\u9593', min: '\u5206', sec: '\u79d2',
+      share_link: '\u30ad\u30e3\u30f3\u30da\u30fc\u30f3\u30ea\u30f3\u30af\u3092\u30b7\u30a7\u30a2',
+      repost_now: '\u30ea\u30dd\u30b9\u30c8\u3067\u30dc\u30fc\u30ca\u30b9\u30a8\u30f3\u30c8\u30ea\u30fc',
+      view_rules: 'ルールの詳細を確認',
+      rules_title: '\u62bd\u9078\u30eb\u30fc\u30eb',
+      rules: [
+        '\u8cfc\u5165\u4e0d\u8981\u3002',
+        '\u53c2\u52a0\u306b\u306fInstagram\u3067@acaiacoffee\u3092\u30d5\u30a9\u30ed\u30fc\u3059\u308b\u5fc5\u8981\u304c\u3042\u308a\u307e\u3059\u3002',
+        '\u6700\u65b0\u306eReel/\u6295\u7a3f\u306b\u30b3\u30e1\u30f3\u30c8\u3057\u3001\u5c11\u306a\u304f\u3068\u30821\u4eba\u306e\u53cb\u9054\u3092\u30bf\u30b0\u3057\u3066\u53c2\u52a0\u3002',
+        '\u8ffd\u52a0\u306e\u53cb\u9054\u30bf\u30b0 = +1 \u30dc\u30fc\u30ca\u30b9\u30a8\u30f3\u30c8\u30ea\u30fc\uff08\u7d2f\u7a4d\u53ef\u80fd\uff09\u3002',
+        'Reel\u3092\u30b9\u30c8\u30fc\u30ea\u30fc\u306b\u30ea\u30dd\u30b9\u30c8 + @acaiacoffee\u3092\u30bf\u30b0\u3067 +5 \u30dc\u30fc\u30ca\u30b9\u30a8\u30f3\u30c8\u30ea\u30fc\u3002',
+        '\u5f53\u9078\u8005\u306f\u30e9\u30f3\u30c0\u30e0\u306b\u9078\u51fa\u3055\u308c\u30013\u670831\u65e5\u306b@acaiacoffee\u306eInstagram\u3067\u767a\u8868\u3055\u308c\u307e\u3059\u3002',
+        '18\u6b73\u4ee5\u4e0a\u3067\u3042\u308b\u3053\u3068\u3002\u4f4f\u6240\u306f\u6709\u52b9\u306a\u914d\u9001\u5148\u3067\u3042\u308b\u5fc5\u8981\u304c\u3042\u308a\u307e\u3059\u3002',
+        '1\u4eba1\u56de\u306e\u53c2\u52a0\u3002\u30a2\u30ab\u30a6\u30f3\u30c8\u306f\u516c\u958b\u3067\u3042\u308b\u5fc5\u8981\u304c\u3042\u308a\u307e\u3059\u3002',
+        '\u4ee5\u4e0b\u306e\u56fd\u306e\u53c2\u52a0\u8005\u306f\u5bfe\u8c61\u5916\u3067\u3059\uff1a\u30a4\u30e9\u30f3\u3001\u30ec\u30d0\u30ce\u30f3\u3001\u30b7\u30ea\u30a2\u3001\u30bf\u30a4\u3001\u30a4\u30f3\u30c9\u3001\u30c8\u30eb\u30b3\u3001\u30a8\u30b8\u30d7\u30c8\u3001\u30ab\u30bf\u30fc\u30eb\u3001\u30ed\u30b7\u30a2\u3002\u3053\u308c\u3089\u306e\u5236\u9650\u306f\u73fe\u5728\u306e\u653f\u6cbb\u7684\u307e\u305f\u306f\u7269\u6d41\u7684\u306a\u5236\u7d04\u306b\u3088\u308b\u3082\u306e\u3067\u3059\uff08\u5909\u66f4\u306e\u53ef\u80fd\u6027\u3042\u308a\uff09\u3002',
+        '\u3053\u306e\u30ad\u30e3\u30f3\u30da\u30fc\u30f3\u306fInstagram\u304c\u30b9\u30dd\u30f3\u30b5\u30fc\u3001\u652f\u6301\u3001\u904b\u55b6\u3001\u307e\u305f\u306f\u95a2\u4e0e\u3059\u308b\u3082\u306e\u3067\u306f\u3042\u308a\u307e\u305b\u3093\u3002',
+        'Acaia\u306f\u3053\u308c\u3089\u306e\u30eb\u30fc\u30eb\u3092\u3044\u3064\u3067\u3082\u8abf\u6574\u3059\u308b\u6a29\u5229\u3092\u7559\u4fdd\u3057\u307e\u3059\u3002',
+        '\u5e78\u904b\u3092\u304a\u7948\u308a\u3057\u307e\u3059\uff01'
+      ],
+      highlights_title: '\u30a4\u30d9\u30f3\u30c8\u30cf\u30a4\u30e9\u30a4\u30c8',
+      brand_blurb: '<strong>Horizon \u2014 単なる「雰囲気」ではない、研ぎ澄まされた「官能」の体験。</strong>',
+      full_rules: '\u5b8c\u5168\u306a\u30eb\u30fc\u30eb',
+      privacy: '\u30d7\u30e9\u30a4\u30d0\u30b7\u30fc',
+      no_purchase: '\u8cfc\u5165\u4e0d\u8981\u3002',
+      votes_suffix: '\u7968'
+    },
+    ko: {
+      event_desc: 'Acaia의 독점 글로벌 테이스팅 시리즈. 스위스 바리스타 챔피언 Mathieu Theis와 공동 개발한, 아카이아의 가장 최신의 혁신을 담은 Horizon은 추출 후 플레이버를 재정의합니다 \u2014 모든 잔 마다 더 부드럽고, 더 균형 잡히고, 더 또렷하고 풍성한 플레이버를.',
+      vote_question: 'Horizon이 커피를 더 나아지게 만들었다고 생각하시나요?',
+      vote_yes: 'Horizon을 사용한 커피가 더 나았다',
+      vote_no: '\ucc28\uc774\ub97c \ubaa8\ub974\uaca0\ub2e4',
+      vote_no_btn: '\ubaa8\ub974\uaca0\ub2e4',
+      vote_recorded: '\ud22c\ud45c\uac00 \uae30\ub85d\ub418\uc5c8\uc2b5\ub2c8\ub2e4!',
+      event_cta: '\uc804 \uc138\uacc4 \ub77c\uc774\ube0c \ud14c\uc774\uc2a4\ud305\uc5d0 \ucc38\uc5ec\ud558\uc5ec Horizon\uc744 \uc9c1\uc811 \uacbd\ud5d8\ud558\uace0, \uc815\ub9d0\ub85c \ucee4\ud53c\uac00 \ub354 \ub9db\uc788\uc5b4\uc9c0\ub294\uc9c0 \ud22c\ud45c\ud574 \uc8fc\uc138\uc694.',
+      giveaway_title: '\uacf5\uc720\ud558\uace0 \ubb34\ub8cc <a href="https://acaia.co/products/horizon" target="_blank" rel="noopener" class="title-link">Horizon</a> \ubc1b\uc73c\uc138\uc694!',
+      to_enter: '\ucc38\uc5ec \ubc29\ubc95',
+      step1: '<a href="https://www.instagram.com/acaiacoffee/?utm_source=results_page&utm_medium=giveaway" target="_blank" rel="noopener">@acaiacoffee</a> \ud314\ub85c\uc6b0',
+      step2: '<a href="https://www.instagram.com/reel/DVrudeakwUs/" target="_blank" rel="noopener">\uc774 Reel</a>\uc758 \ub313\uae00\ub780\uc5d0 \u201cHorizon\u201d\uacfc \uc704\uce58\ub97c \ub313\uae00\ub85c \ub0a8\uae30\uc138\uc694',
+      step3: '\ucd5c\ub300 3\uba85\uc758 \uce5c\uad6c\ub97c \ud0dc\uadf8\ud558\uc5ec \ucd94\uac00 \uc751\ubaa8 \uae30\ud68c\ub97c \uc5bb\uc73c\uc138\uc694',
+      giveaway_subtitle: '\uc804 \uc138\uacc4 \uc5b4\ub514\uc11c\ub098 \ucc38\uc5ec \uac00\ub2a5 \u2014 \uc5b4\ub514\uc11c\ub4e0 \uacf5\uc720\ud558\uc138\uc694!',
+      entries_bonuses: '\uc751\ubaa8 & \ubcf4\ub108\uc2a4',
+      bonus_comment_tag: '\ub313\uae00 + \uce5c\uad6c \ud0dc\uadf8',
+      bonus_1_entry: '1\ud68c \uc751\ubaa8',
+      bonus_additional_tags: '\ucd94\uac00 \uce5c\uad6c \ud0dc\uadf8',
+      bonus_plus1: '\ud0dc\uadf8\ub2f9 +1\ud68c',
+      bonus_repost: 'Reel\uc744 \uc2a4\ud1a0\ub9ac\uc5d0 \ub9ac\ud3ec\uc2a4\ud2b8 + <strong>@acaiacoffee</strong> \ud0dc\uadf8',
+      bonus_plus5: '+5\ud68c \uc751\ubaa8',
+      bonus_stack: '\uc751\ubaa8 \ud69f\uc218 \ub204\uc801! 3\uba85 \ud0dc\uadf8 + Reel \ub9ac\ud3ec\uc2a4\ud2b8 = <strong>9\ud68c \uc751\ubaa8!</strong>',
+      winner_announcement: '\ub2f9\ucca8\uc790 \ubc1c\ud45c',
+      days: '\uc77c', hrs: '\uc2dc\uac04', min: '\ubd84', sec: '\ucd08',
+      share_link: '\uc774\ubca4\ud2b8 \ub9c1\ud06c \uacf5\uc720',
+      repost_now: '\ub9ac\ud3ec\uc2a4\ud2b8\ub85c \ubcf4\ub108\uc2a4 \uc751\ubaa8',
+      view_rules: '\uc804\uccb4 \uaddc\uce59 \ubcf4\uae30',
+      rules_title: '\ucd94\ucca8 \uaddc\uce59',
+      rules: [
+        '\uad6c\ub9e4 \ubd88\ud544\uc694.',
+        '\ucc38\uc5ec\ud558\ub824\uba74 Instagram\uc5d0\uc11c @acaiacoffee\ub97c \ud314\ub85c\uc6b0\ud574\uc57c \ud569\ub2c8\ub2e4.',
+        '\ucd5c\uc2e0 Reel/\uac8c\uc2dc\ubb3c\uc5d0 \ub313\uae00\uc744 \ub2ec\uace0 \ucd5c\uc18c 1\uba85\uc758 \uce5c\uad6c\ub97c \ud0dc\uadf8\ud558\uba74 \ucc38\uc5ec\ub429\ub2c8\ub2e4.',
+        '\ucd94\uac00 \uce5c\uad6c \ud0dc\uadf8 = +1 \ubcf4\ub108\uc2a4 \uc751\ubaa8(\ub204\uc801 \uac00\ub2a5).',
+        'Reel\uc744 \uc2a4\ud1a0\ub9ac\uc5d0 \ub9ac\ud3ec\uc2a4\ud2b8 + @acaiacoffee \ud0dc\uadf8 \uc2dc +5 \ubcf4\ub108\uc2a4 \uc751\ubaa8.',
+        '\ub2f9\ucca8\uc790\ub294 \ubb34\uc791\uc704\ub85c \uc120\uc815\ub418\uba70 3\uc6d4 31\uc77c @acaiacoffee Instagram\uc5d0\uc11c \ubc1c\ud45c\ub429\ub2c8\ub2e4.',
+        '18\uc138 \uc774\uc0c1\uc774\uc5b4\uc57c \ud569\ub2c8\ub2e4. \uc8fc\uc18c\ub294 \uc720\ud6a8\ud55c \ubc30\uc1a1 \uc8fc\uc18c\uc5ec\uc57c \ud569\ub2c8\ub2e4.',
+        '1\uc778 1\ud68c \ucc38\uc5ec. \uacc4\uc815\uc740 \uacf5\uac1c\uc5ec\uc57c \ud569\ub2c8\ub2e4.',
+        '\ub2e4\uc74c \uad6d\uac00\uc758 \ucc38\uac00\uc790\ub294 \uc790\uaca9\uc774 \uc5c6\uc2b5\ub2c8\ub2e4: \uc774\ub780, \ub808\ubc14\ub17c, \uc2dc\ub9ac\uc544, \ud0dc\uad6d, \uc778\ub3c4, \ud130\ud0a4, \uc774\uc9d1\ud2b8, \uce74\ud0c0\ub974, \ub7ec\uc2dc\uc544. \uc774\ub7ec\ud55c \uc81c\ud55c\uc740 \ud604\uc7ac\uc758 \uc815\uce58\uc801 \ub610\ub294 \ubb3c\ub958\uc801 \uc81c\uc57d \ub54c\ubb38\uc785\ub2c8\ub2e4(\ubcc0\uacbd \uac00\ub2a5).',
+        '\uc774 \uc774\ubca4\ud2b8\ub294 Instagram\uc774 \ud6c4\uc6d0, \uc9c0\uc9c0, \uad00\ub9ac \ub610\ub294 \uad00\ub828\ub41c \uac83\uc774 \uc544\ub2d9\ub2c8\ub2e4.',
+        'Acaia\ub294 \uc774 \uaddc\uce59\uc744 \uc5b8\uc81c\ub4e0\uc9c0 \uc870\uc815\ud560 \uad8c\ub9ac\ub97c \ubcf4\uc720\ud569\ub2c8\ub2e4.',
+        '\ud589\uc6b4\uc744 \ube4c\ub2c8\ub2e4!'
+      ],
+      highlights_title: '\uc774\ubca4\ud2b8 \ud558\uc774\ub77c\uc774\ud2b8',
+      brand_blurb: '<strong>Horizon \u2014 압력 조정을 넘어, 센서리 경험으로.</strong>',
+      full_rules: '\uc804\uccb4 \uaddc\uce59',
+      privacy: '\uac1c\uc778\uc815\ubcf4',
+      no_purchase: '\uad6c\ub9e4 \ubd88\ud544\uc694.',
+      votes_suffix: '\ud45c'
+    }
+  };
+
+  let currentLang = 'en';
+
+  function applyTranslations(lang) {
+    currentLang = lang;
+    const t = TRANSLATIONS[lang];
+    if (!t) return;
+
+    document.documentElement.lang = lang;
+
+    // Text content
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+
+    // HTML content (for links inside text)
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+
+    // Rules list
+    const rulesList = document.getElementById('rulesList');
+    if (rulesList && t.rules) {
+      rulesList.innerHTML = t.rules.map(r => '<li>' + r + '</li>').join('');
+    }
+
+    // Update vote count suffix
+    const totalEl = document.getElementById('totalTasting');
+    if (totalEl) {
+      const num = totalEl.textContent.replace(/[^\d]/g, '') || '0';
+      totalEl.textContent = num + ' ' + t.votes_suffix;
+    }
+
+    // Update switcher active state
+    document.querySelectorAll('.lang-switcher button').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+  }
+
+  // Switcher click handler
+  document.getElementById('langSwitcher').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-lang]');
+    if (!btn) return;
+    applyTranslations(btn.dataset.lang);
+  });
+
+  // Apply English on load
+  document.addEventListener('DOMContentLoaded', () => applyTranslations('en'));
+  </script>
 </body>
 </html>
