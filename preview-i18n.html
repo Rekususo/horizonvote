@@ -652,8 +652,17 @@
     applyTranslations(btn.dataset.lang);
   });
 
-  // Apply English on load
-  document.addEventListener('DOMContentLoaded', () => applyTranslations('en'));
+  // Detect browser language and apply
+  function detectLang() {
+    const supported = Object.keys(TRANSLATIONS);
+    const nav = navigator.language || navigator.userLanguage || 'en';
+    if (supported.includes(nav)) return nav;
+    const base = nav.split('-')[0];
+    const match = supported.find(s => s.split('-')[0] === base);
+    if (match) return match;
+    return 'en';
+  }
+  document.addEventListener('DOMContentLoaded', () => applyTranslations(detectLang()));
   </script>
 </body>
 </html>
