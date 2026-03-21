@@ -313,7 +313,7 @@ function initEventPhotos() {
 function initPageView() {
   if (!CONFIG.sheetUrl) return;
   // Increment page_view count
-  const url = CONFIG.sheetUrl + '?action=vote&type=page_view';
+  const url = CONFIG.sheetUrl + '?action=vote&type=page_view&_t=' + Date.now();
   fetch(url, { mode: 'no-cors' }).catch(() => {});
 
   // Show counter only with ?stats=1
