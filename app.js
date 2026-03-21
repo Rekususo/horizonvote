@@ -309,6 +309,32 @@ function initEventPhotos() {
   });
 }
 
+// ---------- PAGE VIEW COUNTER ----------
+function initPageView() {
+  if (!CONFIG.sheetUrl) return;
+  // Increment page_view count
+  const url = CONFIG.sheetUrl + '?action=vote&type=page_view';
+  fetch(url, { mode: 'no-cors' }).catch(() => {});
+
+  // Show counter only with ?stats=1
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('stats') === '1') {
+    // Fetch current count after a short delay to include this visit
+    setTimeout(async () => {
+      try {
+        const readUrl = CONFIG.sheetUrl + '?action=read&_t=' + Date.now();
+        const res = await fetch(readUrl);
+        const json = await res.json();
+        const views = parseInt(json.page_view, 10) || 0;
+        const badge = document.createElement('div');
+        badge.style.cssText = 'position:fixed;bottom:12px;right:12px;z-index:9999;background:rgba(0,0,0,0.85);color:#A09880;font-family:monospace;font-size:12px;padding:6px 12px;border-radius:6px;border:1px solid rgba(200,176,128,0.2);pointer-events:none;';
+        badge.textContent = views.toLocaleString() + ' views';
+        document.body.appendChild(badge);
+      } catch (e) {}
+    }, 1500);
+  }
+}
+
 // ---------- INIT ----------
 document.addEventListener('DOMContentLoaded', () => {
   initEls();
@@ -318,6 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCopyLink();
   initScrollFade();
   initEventPhotos();
+  initPageView();
 
   setInterval(fetchData, CONFIG.pollInterval);
   updateCountdown();
