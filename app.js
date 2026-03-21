@@ -3,7 +3,7 @@
 // ---------- CONFIG ----------
 const CONFIG = {
   pollInterval: 15000,
-  sheetUrl: 'https://script.google.com/macros/s/AKfycbxbjw54Gbz3d1SHnZRj6K_2zz6tnctVmaZS23uue4QHoNGZUKTjTchlt7LULTDSC31gHQ/exec',
+  sheetUrl: 'https://script.google.com/macros/s/AKfycbxgvqBZxYPq3yGLnJ75AitMoYym2oNkddqRN8hzRG4yuKylxolksVkcx6FYgoaZ9x2RNg/exec',
   countdownTarget: '2026-03-31T00:00:00',
 };
 
